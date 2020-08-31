@@ -1,0 +1,4 @@
+NIST
+.ipynb_checkpoints
+__pycache__
+silence_detector.pt
