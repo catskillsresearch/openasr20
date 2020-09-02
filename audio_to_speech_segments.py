@@ -24,5 +24,5 @@ def audio_to_speech_segments(sample_rate, device, model, audio_file):
     y_pred = (y_pred > 0.5).astype(float)
     regions=contiguous_regions(y_pred)
     for start, end in regions:
-        clip_fn = f"{audio_file[:-4].replace('/audio/', '/audio_split')}_{sample_rate}_{start:06d}_{end:06d}.wav"
+        clip_fn = f"{audio_file[:-4].replace('/audio/', '/audio_split/')}_{sample_rate}_{start:06d}_{end:06d}.wav"
         sf.write(clip_fn, x_np[start:end], sample_rate)
