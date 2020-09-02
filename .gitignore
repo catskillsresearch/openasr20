@@ -2,3 +2,9 @@ NIST
 .ipynb_checkpoints
 __pycache__
 silence_detector.pt
+log
+runs
+save
+am_test.csv
+am_train.csv
+am_valid.csv
