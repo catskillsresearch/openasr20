@@ -123,6 +123,37 @@ class Transformer(nn.Module):
 
         return _, strs_hyps, strs_gold
 
+    def infer(self, padded_input, input_lengths, beam_search=False, beam_width=0, beam_nbest=0, lm=None, lm_rescoring=False, lm_weight=0.1, c_weight=1, verbose=False):
+        """
+        args:
+            padded_input: B x T x D
+            input_lengths: B
+        output:
+            batch_ids_nbest_hyps: list of nbest id
+            batch_strs_nbest_hyps: list of nbest str
+        """
+        if self.feat_extractor == 'emb_cnn' or self.feat_extractor == 'vgg_cnn':
+            padded_input = self.conv(padded_input)
+
+        # Reshaping features
+        sizes = padded_input.size() # B x H_1 (channel?) x H_2 x T
+        padded_input = padded_input.view(sizes[0], sizes[1] * sizes[2], sizes[3])
+        padded_input = padded_input.transpose(1, 2).contiguous()  # BxTxH
+
+        encoder_padded_outputs, _ = self.encoder(padded_input, input_lengths)
+
+        if beam_search:
+            ids_hyps, strs_hyps = self.decoder.beam_search(encoder_padded_outputs, beam_width=beam_width, nbest=1, lm=lm, lm_rescoring=lm_rescoring, lm_weight=lm_weight, c_weight=c_weight)
+            if len(strs_hyps) != sizes[0]:
+                strs_hyps = self.decoder.greedy_search(encoder_padded_outputs)
+        else:
+            strs_hyps = self.decoder.greedy_search(encoder_padded_outputs)
+        
+        if verbose:
+            print("HYP", strs_hyps)
+
+        return strs_hyps
+
 class Encoder(nn.Module):
     """ 
     Encoder Transformer class

@@ -11,6 +11,51 @@
 import re
 import pandas as pd
 
+def tokenize(label):
+
+	words = label.split(" ")
+
+	#1. delete some separate tags
+	words_deleted = list(filter(lambda x: x not in ["(())",
+													"<no-speech>",
+													"~",
+													"<sta>",
+													"<lipsmack>", "<breath>", "<cough>", "<laugh>", "<click>", "<ring>", "<dtmf>", "<int>",
+													"<male-to-female>", "<female-to-male>"],
+													words))
+
+	#2. convert optional deletable tags and delete remaining tags
+	def optional_deletable_space(word):
+
+		if word == "<hes>" or word == "<foreign>" or re.match('^\-.*', word) or re.match('.*\-$', word):
+			return "(%s)" % word
+		elif re.match('\*.*\*',word):
+			return "(%s)" % word.strip('*')
+		elif "_" in word and word != "_":
+			return re.sub("[\_]"," ",word)
+		elif re.match('\/.*\/', word):
+			return "%s" % word.strip('/')
+		else:
+			return word
+
+	words_tokenized = list(map(optional_deletable_space, words_deleted))
+
+	if len(words_tokenized) > 0:
+		#3. replace with the string "IGNORE_TIME_SEGMENT_IN_SCORING" when <overlap> or <prompt> appears.
+		if "<overlap>" in words_tokenized or "<prompt>" in words_tokenized:
+			label_tokenized = "IGNORE_TIME_SEGMENT_IN_SCORING"
+		else:
+			label_tokenized = " ".join(words_tokenized)
+	else:
+		label_tokenized = ""
+
+	label_final = re.sub('\.(?!\d)|\,|\?', '', label_tokenized)
+
+	label_final = label_final.split(' ')
+	label_final = ' '.join([x for x in label_final if '(' not in x])
+        
+	return label_final
+
 def txt_to_stm(df, filename, channel):
 
 	time = []
@@ -38,12 +83,9 @@ def txt_to_stm(df, filename, channel):
 	for v, w in zip(df_new["time"][:-1], df_new["time"][1:]):
 
 		if isinstance(df_new[df_new['time'] == v]['label'].item(),str):
-			tokenized_text = df_new[df_new['time'] == v]['label'].item()
+			tokenized_text = tokenize(df_new[df_new['time'] == v]['label'].item())
 		else:
-			tokenized_text = str(df_new[df_new['time'] == v]['label'].item())
-
-		if tokenized_text == '<no-speech>':
-                        tokenized_text = ''
+			tokenized_text = tokenize(str(df_new[df_new['time'] == v]['label'].item()))
 
 		#4. if normalized transcript is empty, speakerid will be added interSeg suffix
 		if tokenized_text == "":
