@@ -8,8 +8,8 @@ from utils.metrics import calculate_metrics, calculate_cer, calculate_wer
 from torch.autograd import Variable
 import torch
 import logging
-
 import sys
+from torch.utils.tensorboard import SummaryWriter
 
 class Trainer():
     """
@@ -17,6 +17,7 @@ class Trainer():
     """
     def __init__(self):
         logging.info("Trainer is initialized")
+        self.writer = SummaryWriter()
 
     def train(self, model, train_loader, train_sampler, valid_loader_list, opt, loss_type, start_epoch, num_epochs, label2id, id2label, last_metrics=None):
         """
@@ -37,6 +38,8 @@ class Trainer():
 
         logging.info("name " +  constant.args.name)
 
+        training_pass = 0
+        
         for epoch in range(start_epoch, num_epochs):
             sys.stdout.flush()
             total_loss, total_cer, total_wer, total_char, total_word = 0, 0, 0, 0, 0
@@ -114,8 +117,16 @@ class Trainer():
                 non_pad_mask = gold.ne(constant.PAD_TOKEN)
                 num_word = non_pad_mask.sum().item()
 
+                TRAIN_LOSS=total_loss/(i+1)
+                CER = total_cer*100/total_char
                 pbar.set_description("(Epoch {}) TRAIN LOSS:{:.4f} CER:{:.2f}% LR:{:.7f}".format(
-                    (epoch+1), total_loss/(i+1), total_cer*100/total_char, opt._rate))
+                    (epoch+1), TRAIN_LOSS, CER, opt._rate))
+                self.writer.add_scalar("Loss/train", TRAIN_LOSS, training_pass+1)
+                self.writer.add_scalar("CER/train", CER, training_pass+1)
+                self.writer.add_scalar("LR/train", opt._rate, training_pass+1)
+                self.writer.flush()
+                training_pass += 1
+
             logging.info("(Epoch {}) TRAIN LOSS:{:.4f} CER:{:.2f}% LR:{:.7f}".format(
                 (epoch+1), total_loss/(len(train_loader)), total_cer*100/total_char, opt._rate))
 

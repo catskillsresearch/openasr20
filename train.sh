@@ -5,11 +5,11 @@ python end2end_asr_pytorch/train.py \
 	--valid-manifest-list am_valid.csv \
 	--test-manifest-list am_test.csv \
 	--cuda \
-	--batch-size 8 \
+	--batch-size 6 \
 	--labels-path amharic_characters.json  \
 	--lr 1e-4 \
 	--name amharic_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4 \
-	--save-folder save/ \
+	--save-folder save \
 	--save-every 1 \
 	--feat_extractor vgg_cnn \
 	--dropout 0.1 \
@@ -23,4 +23,5 @@ python end2end_asr_pytorch/train.py \
 	--dim-emb 512 \
 	--shuffle \
 	--min-lr 1e-6 \
-	--k-lr 1
+	--k-lr 1 \
+	--continue-from save/amharic_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4/best_model.th
