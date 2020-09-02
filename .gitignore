@@ -8,3 +8,6 @@ save
 am_test.csv
 am_train.csv
 am_valid.csv
+amharic_characters.json
+amharic_manifest.csv
+Untitled.ipynb

@@ -14,4 +14,4 @@ def silence_detector(sample_rate):
     ).cuda()
     model_fn='silence_detector.pt'
     model.load_state_dict(torch.load(model_fn))
-    return model
+    return device, model

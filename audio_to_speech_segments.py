@@ -3,11 +3,12 @@
 from pathlib import Path
 
 import librosa, torch, os
+import numpy as np
 from running_mean import running_mean
 from contiguous_regions import contiguous_regions
 from to_segments import to_segments
 
-def audio_to_speech_segments(sample_rate, model, audio_file):
+def audio_to_speech_segments(sample_rate, device, model, audio_file):
     audio_dir=os.path.dirname(audio_file)
     audio_split_dir=audio_dir.replace('/audio', '/audio_split')
     Path(audio_split_dir).mkdir(parents=True, exist_ok=True)
@@ -18,7 +19,7 @@ def audio_to_speech_segments(sample_rate, model, audio_file):
         tensor_x = torch.Tensor(x_samples_np).to(device)
         y_pred_cuda=model(tensor_x)
     y_pred = np.reshape(y_pred_cuda.cpu().numpy(), -1)
-    y_pred = running_mean(y_pred, 500)[0:y_np.shape[0]]
+    y_pred = running_mean(y_pred, 500)[0:x_np.shape[0]]
     y_pred = (y_pred > 0.5).astype(float)
     regions=continuous_regions(y_pred)
     for start, stop in regions:
