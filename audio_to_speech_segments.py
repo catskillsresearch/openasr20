@@ -4,6 +4,7 @@ from pathlib import Path
 
 import librosa, torch, os
 import numpy as np
+import soundfile as sf
 from running_mean import running_mean
 from contiguous_regions import contiguous_regions
 from to_segments import to_segments
@@ -22,6 +23,6 @@ def audio_to_speech_segments(sample_rate, device, model, audio_file):
     y_pred = running_mean(y_pred, 500)[0:x_np.shape[0]]
     y_pred = (y_pred > 0.5).astype(float)
     regions=contiguous_regions(y_pred)
-    for start, stop in regions:
+    for start, end in regions:
         clip_fn = f"{audio_file[:-4].replace('/audio/', '/audio_split')}_{sample_rate}_{start:06d}_{end:06d}.wav"
-        sf.write(clip_fn, x_np[start:stop], sample_rate)
+        sf.write(clip_fn, x_np[start:end], sample_rate)
