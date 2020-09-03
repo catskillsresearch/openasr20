@@ -22,7 +22,9 @@ def audio_to_speech_segments(sample_rate, device, model, audio_file):
     y_pred = np.reshape(y_pred_cuda.cpu().numpy(), -1)
     y_pred = running_mean(y_pred, 500)[0:x_np.shape[0]]
     y_pred = (y_pred < 0.5).astype(float)
-    regions=contiguous_regions(y_pred)
+
+    MINIMUM_SEGMENT_SIZE=4000
+    regions=[(x,y) for x,y in contiguous_regions(y_pred) if y-x > MINIMUM_SEGMENT_SIZE]
     for start, end in regions:
         clip_fn = f"{audio_file[:-4].replace('/audio/', '/audio_split/')}_{sample_rate}_{start:06d}_{end:06d}.wav"
         sf.write(clip_fn, x_np[start:end], sample_rate)

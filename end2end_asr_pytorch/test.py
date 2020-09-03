@@ -63,6 +63,7 @@ def evaluate(model, test_loader, lm=None):
 
 
 if __name__ == '__main__':
+
     args = constant.args
 
     start_iter = 0
@@ -91,7 +92,5 @@ if __name__ == '__main__':
     lm = None
     if constant.args.lm_rescoring:
         lm = LM(constant.args.lm_path)
-
-    print(model)
 
     evaluate(model, test_loader, lm=lm)

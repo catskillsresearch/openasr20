@@ -15,7 +15,8 @@ from utils.metrics import calculate_metrics, calculate_cer, calculate_wer, calcu
 from utils.functions import save_model, load_model
 from utils.lstm_utils import LM
 
-def infer(model, test_loader, lm=None):
+
+def evaluate(f, model, test_loader, lm=None):
     """
     Evaluation
     args:
@@ -34,19 +35,21 @@ def infer(model, test_loader, lm=None):
 
             if constant.USE_CUDA:
                 src = src.cuda()
+                tgt = tgt.cuda()
 
-            batch_strs_hyps = model.infer(
-                src, src_lengths, beam_search=constant.args.beam_search,
-                beam_width=constant.args.beam_width, beam_nbest=constant.args.beam_nbest,
-                lm=lm, lm_rescoring=constant.args.lm_rescoring, lm_weight=constant.args.lm_weight,
+            batch_ids_hyps, batch_strs_hyps, batch_strs_gold = model.evaluate(
+                src, src_lengths, tgt, beam_search=constant.args.beam_search,
+                beam_width=constant.args.beam_width, beam_nbest=constant.args.beam_nbest, lm=lm,
+                lm_rescoring=constant.args.lm_rescoring, lm_weight=constant.args.lm_weight,
                 c_weight=constant.args.c_weight, verbose=constant.args.verbose)
 
             for x in range(len(batch_strs_hyps)):
                 hyp = batch_strs_hyps[x].replace(constant.EOS_CHAR, "").replace(constant.SOS_CHAR, "").replace(constant.PAD_CHAR, "")
-
-            return hyp
-
+                f.write(f'{hyp}\n')
+                f.flush()
+                
 if __name__ == '__main__':
+
     args = constant.args
 
     start_iter = 0
@@ -76,6 +79,7 @@ if __name__ == '__main__':
     if constant.args.lm_rescoring:
         lm = LM(constant.args.lm_path)
 
-    print(model)
-
-    infer(model, test_loader, lm=lm)
+    fn = "RESULT.txt"
+    with open(fn, 'w', encoding="utf-8") as f:
+         evaluate(f, model, test_loader, lm=lm)
+    print('saved', fn)
