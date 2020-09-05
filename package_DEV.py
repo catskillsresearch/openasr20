@@ -10,13 +10,14 @@ release=0
 phase='dev'
 model='graphemes'
 sample_rate=8000
-language='amharic'
+language=os.getenv('language')
 stage='NIST'
+translation_file=f'RESULT_{language}.txt'
 
-with open('RESULT.txt', 'r', encoding='utf-8') as f:
+with open(translation_file, 'r', encoding='utf-8') as f:
     translations=f.readlines()
 
-split_files = [f'{x},infer.txt' for x in list(sorted(glob(f'{stage}/*/dev/audio_split/*.wav')))]
+split_files = [f'{x},infer.txt' for x in list(sorted(glob(f'{stage}/openasr20_{language}/dev/audio_split/*.wav')))]
 
 ctms={'_'.join(os.path.basename(fn.split(',')[0]).split('_')[0:7]): [] for fn in split_files}
 

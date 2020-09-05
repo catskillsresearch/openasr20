@@ -1,14 +1,18 @@
 export PYTHONPATH=/home/catskills/Desktop/openasr20/end2end_asr_pytorch
 
+export model_dir=save/${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4
+
+mkdir -p ${model_dir}
+
 python end2end_asr_pytorch/train.py \
-	--train-manifest-list am_train.csv \
-	--valid-manifest-list am_valid.csv \
-	--test-manifest-list am_test.csv \
+	--train-manifest-list ${language}_train.csv \
+	--valid-manifest-list ${language}_valid.csv \
+	--test-manifest-list ${language}_test.csv \
 	--cuda \
 	--batch-size 4 \
-	--labels-path amharic_characters.json  \
+	--labels-path ${language}_characters.json  \
 	--lr 1e-4 \
-	--name amharic_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4 \
+	--name ${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4 \
 	--save-folder save \
 	--save-every 1 \
 	--feat_extractor vgg_cnn \
@@ -23,5 +27,5 @@ python end2end_asr_pytorch/train.py \
 	--dim-emb 512 \
 	--shuffle \
 	--min-lr 1e-6 \
-	--k-lr 1 \
-	--continue-from save/amharic_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4/best_model.th
+	--k-lr 1
+#	--continue-from ${model_dir}/best_model.th

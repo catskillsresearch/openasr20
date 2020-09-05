@@ -21,12 +21,13 @@ import random
 import soundfile as sf
 from pathlib import Path
 
-stage='NIST'
+language=os.getenv('language')
+stage=f'NIST'
 sample_rate=8000
 window = sample_rate
 H=window
 
-transcripts = list(sorted(glob(f'{stage}/*/build/transcription/*.txt')))
+transcripts = list(sorted(glob(f'{stage}/openasr20_{language}/build/transcription/*.txt')))
 len(transcripts)
 
 audio_files=[x.replace('/transcription/', '/audio/').replace('.txt','.wav') for x in transcripts]
@@ -59,16 +60,12 @@ for transcript_file in tqdm(transcripts):
         sf.write(audio_file, x_np, sample_rate)
         
     # Split audio
-    speech_segments=[(int(a*sample_rate), int(b*sample_rate), words) for (a,b,words) in speech]
+    speech_segments=[(int(a*sample_rate), int(b*sample_rate), words)
+                     for (a,b,words) in speech
+                     if 'IGNORE' not in words]
     for i, (lower, upper, words) in enumerate(speech_segments):
         audio_split_file=f"{audio_file[0:-4].replace('/audio/','/audio_split/')}_{i:03d}.wav"
-        sf.write(audio_split_file, x_np[lower:upper], sample_rate)
-
         transcript_split_file=f"{transcript_file[0:-4].replace('/transcription/','/transcription_split/')}_{i:03d}.txt"
+        sf.write(audio_split_file, x_np[lower:upper], sample_rate)
         with open(transcript_split_file,'w') as f:
             f.write(words)
-
-
-
-
-
