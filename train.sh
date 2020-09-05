@@ -9,11 +9,12 @@ python end2end_asr_pytorch/train.py \
 	--valid-manifest-list ${language}_valid.csv \
 	--test-manifest-list ${language}_test.csv \
 	--cuda \
-	--batch-size 4 \
+	--batch-size ${batch_size} \
 	--labels-path ${language}_characters.json  \
 	--lr 1e-4 \
 	--name ${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4 \
 	--save-folder save \
+	--epochs ${n_epochs}
 	--save-every 1 \
 	--feat_extractor vgg_cnn \
 	--dropout 0.1 \
@@ -27,5 +28,5 @@ python end2end_asr_pytorch/train.py \
 	--dim-emb 512 \
 	--shuffle \
 	--min-lr 1e-6 \
-	--k-lr 1
-#	--continue-from ${model_dir}/best_model.th
+	--k-lr 1 \
+	${continue_from}
