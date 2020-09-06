@@ -11,32 +11,32 @@
 import re
 import pandas as pd
 
-def tokenize(label):
+def optional_deletable_space(word):
+	if word == "<hes>" or word == "<foreign>" or re.match('^\-.*', word) or re.match('.*\-$', word):
+		return "(%s)" % word
+	elif re.match('\*.*\*',word):
+		return "(%s)" % word.strip('*')
+	elif "_" in word and word != "_":
+		return re.sub("[\_]"," ",word)
+	elif re.match('\/.*\/', word):
+		return "%s" % word.strip('/')
+	else:
+		return word
+
+def tokenize_NIST(label):
 
 	words = label.split(" ")
 
 	#1. delete some separate tags
 	words_deleted = list(filter(lambda x: x not in ["(())",
-													"<no-speech>",
-													"~",
-													"<sta>",
-													"<lipsmack>", "<breath>", "<cough>", "<laugh>", "<click>", "<ring>", "<dtmf>", "<int>",
-													"<male-to-female>", "<female-to-male>"],
-													words))
+							"<no-speech>",
+							"~",
+							"<sta>",
+							"<lipsmack>", "<breath>", "<cough>", "<laugh>", "<click>", "<ring>", "<dtmf>", "<int>",
+							"<male-to-female>", "<female-to-male>"],
+				    words))
 
 	#2. convert optional deletable tags and delete remaining tags
-	def optional_deletable_space(word):
-
-		if word == "<hes>" or word == "<foreign>" or re.match('^\-.*', word) or re.match('.*\-$', word):
-			return "(%s)" % word
-		elif re.match('\*.*\*',word):
-			return "(%s)" % word.strip('*')
-		elif "_" in word and word != "_":
-			return re.sub("[\_]"," ",word)
-		elif re.match('\/.*\/', word):
-			return "%s" % word.strip('/')
-		else:
-			return word
 
 	words_tokenized = list(map(optional_deletable_space, words_deleted))
 
@@ -50,11 +50,19 @@ def tokenize(label):
 		label_tokenized = ""
 
 	label_final = re.sub('\.(?!\d)|\,|\?', '', label_tokenized)
-
 	label_final = label_final.split(' ')
-	label_final = ' '.join([x for x in label_final if '(' not in x])
-        
 	return label_final
+
+def tokenize(label):
+        label = ' '.join([x for x in label.split(' ') if x[0] not in ('(', '<', '~')])
+        label = label.replace('*',' ').replace('-', ' ').replace('_', ' ').replace('_', ' ')                 
+        words_tokenized = label.split(" ")
+        if len(words_tokenized) > 0:
+            label_tokenized = " ".join(words_tokenized)
+        else:
+            label_tokenized = ""
+        label_final = re.sub('\.(?!\d)|\,|\?', '', label_tokenized)
+        return label_final
 
 def txt_to_stm(df, filename, channel):
 

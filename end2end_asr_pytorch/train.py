@@ -23,7 +23,6 @@ if __name__ == '__main__':
     print("THE EXPERIMENT LOG IS SAVED IN: " + "log/" + args.name)
     print("TRAINING MANIFEST: ", args.train_manifest_list)
     print("VALID MANIFEST: ", args.valid_manifest_list)
-    print("TEST MANIFEST: ", args.test_manifest_list)
     print("="*50)
 
     if not os.path.exists("./log"):
@@ -70,12 +69,6 @@ if __name__ == '__main__':
                                         normalize=True, augment=False)
         valid_loader = AudioDataLoader(valid_data, num_workers=args.num_workers, batch_size=args.batch_size)
         valid_loader_list.append(valid_loader)
-
-    for i in range(len(args.test_manifest_list)):
-        test_data = SpectrogramDataset(audio_conf, manifest_filepath_list=[args.test_manifest_list[i]], label2id=label2id,
-                                    normalize=True, augment=False)
-        test_loader = AudioDataLoader(test_data, num_workers=args.num_workers)
-        test_loader_list.append(test_loader)
 
     start_epoch = 0
     metrics = None

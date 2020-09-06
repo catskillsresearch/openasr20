@@ -64,8 +64,10 @@ for transcript_file in tqdm(transcripts):
                      for (a,b,words) in speech
                      if 'IGNORE' not in words]
     for i, (lower, upper, words) in enumerate(speech_segments):
-        audio_split_file=f"{audio_file[0:-4].replace('/audio/','/audio_split/')}_{i:03d}.wav"
-        transcript_split_file=f"{transcript_file[0:-4].replace('/transcription/','/transcription_split/')}_{i:03d}.txt"
+        A=f'{lower/sample_rate:.3f}'
+        B=f'{upper/sample_rate:.3f}'
+        audio_split_file=f"{audio_file[0:-4].replace('/audio/','/audio_split/')}_{i:03d}_{A}_{B}.wav"
+        transcript_split_file=f"{transcript_file[0:-4].replace('/transcription/','/transcription_split/')}_{i:03d}_{A}_{B}.txt"
         sf.write(audio_split_file, x_np[lower:upper], sample_rate)
         with open(transcript_split_file,'w') as f:
             f.write(words)

@@ -9,7 +9,6 @@ mkdir -p ${model_dir}
 python end2end_asr_pytorch/train.py \
 	--train-manifest-list ${language}_train.csv \
 	--valid-manifest-list ${language}_valid.csv \
-	--test-manifest-list ${language}_test.csv \
 	--cuda \
 	--batch-size ${batch_size} \
 	--labels-path ${language}_characters.json  \
