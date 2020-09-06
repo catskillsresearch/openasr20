@@ -1,1 +1,1 @@
-language.sh tamil 1 4 1 ""
+language.sh tamil 100 3 1 ""

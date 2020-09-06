@@ -79,7 +79,9 @@ if __name__ == '__main__':
     if constant.args.lm_rescoring:
         lm = LM(constant.args.lm_path)
 
-    fn = "RESULT.txt"
+    fn = constant.args.output
+    print("output file: ", fn)
+    
     with open(fn, 'w', encoding="utf-8") as f:
          evaluate(f, model, test_loader, lm=lm)
     print('saved', fn)

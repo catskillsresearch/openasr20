@@ -38,6 +38,8 @@ parser.add_argument('--feat_extractor', default='vgg_cnn', type=str, help='emb_c
 
 parser.add_argument('--verbose', action='store_true', help='Verbose')
 
+parser.add_argument('--output', default='', help='Output file for inference')
+
 parser.add_argument('--continue-from', default='', help='Continue from checkpoint model')
 parser.add_argument('--augment', dest='augment', action='store_true', help='Use random tempo and gain perturbations.')
 parser.add_argument('--noise-dir', default=None,

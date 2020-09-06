@@ -1,3 +1,5 @@
+#!/usr/bin/sh -x
+
 export PYTHONPATH=/home/catskills/Desktop/openasr20/end2end_asr_pytorch
 
 export model_dir=save/${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4
@@ -14,7 +16,7 @@ python end2end_asr_pytorch/train.py \
 	--lr 1e-4 \
 	--name ${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4 \
 	--save-folder save \
-	--epochs ${n_epochs}
+	--epochs ${n_epochs} \
 	--save-every 1 \
 	--feat_extractor vgg_cnn \
 	--dropout 0.1 \
