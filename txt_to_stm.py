@@ -53,8 +53,18 @@ def tokenize_NIST(label):
 	label_final = label_final.split(' ')
 	return label_final
 
-def tokenize(label):
-        label = ' '.join([x for x in label.split(' ') if x[0] not in ('(', '<', '~')])
+def tokenize(label, no_Q = False):
+        if no_Q:
+            label = label.replace('Q','')
+            label = label.replace('V','')
+            label = label.replace('cut','')
+        if not label:
+            return ''
+        try:
+                label = ' '.join([x for x in label.split(' ') if len(x) and x[0] not in ('(', '<', '~')])
+        except:
+                print("label", label)
+                quit()
         label = label.replace('*',' ').replace('-', ' ').replace('_', ' ').replace('_', ' ')                 
         words_tokenized = label.split(" ")
         if len(words_tokenized) > 0:
@@ -64,7 +74,7 @@ def tokenize(label):
         label_final = re.sub('\.(?!\d)|\,|\?', '', label_tokenized)
         return label_final
 
-def txt_to_stm(df, filename, channel):
+def txt_to_stm(df, filename, channel, no_Q = False):
 
 	time = []
 	label = []
@@ -91,9 +101,9 @@ def txt_to_stm(df, filename, channel):
 	for v, w in zip(df_new["time"][:-1], df_new["time"][1:]):
 
 		if isinstance(df_new[df_new['time'] == v]['label'].item(),str):
-			tokenized_text = tokenize(df_new[df_new['time'] == v]['label'].item())
+			tokenized_text = tokenize(df_new[df_new['time'] == v]['label'].item(), no_Q)
 		else:
-			tokenized_text = tokenize(str(df_new[df_new['time'] == v]['label'].item()))
+			tokenized_text = tokenize(str(df_new[df_new['time'] == v]['label'].item()), no_Q)
 
 		#4. if normalized transcript is empty, speakerid will be added interSeg suffix
 		if tokenized_text == "":

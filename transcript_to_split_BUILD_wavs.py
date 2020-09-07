@@ -22,6 +22,8 @@ import soundfile as sf
 from pathlib import Path
 
 language=os.getenv('language')
+no_Q = (language == 'cantonese')
+
 stage=f'NIST'
 sample_rate=8000
 window = sample_rate
@@ -50,7 +52,7 @@ for transcript_file in tqdm(transcripts):
     file = "_".join(os.path.basename(transcript_file).split("_")[:-1])
     channel = os.path.basename(transcript_file).split("_")[-1].split(".")[-2]
     transcript_df = pd.read_csv(transcript_file, sep = "\n", header = None, names = ["content"])
-    result = txt_to_stm(transcript_df, file, channel)
+    result = txt_to_stm(transcript_df, file, channel, no_Q)
     speech=[(float(x[-3]), float(x[-2]), x[-1]) for x in result if len(x)==6]
     x_np,sr=librosa.load(audio_file, sr=sample_rate)
     with audioread.audio_open(audio_file) as f:

@@ -6,6 +6,10 @@ export model_dir=save/${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_
 
 mkdir -p ${model_dir}
 
+if [ $continue_from -eq 1 ]; then
+   export cfrom="--continue-from ${model_dir}/best_model.th"
+fi
+
 python end2end_asr_pytorch/train.py \
 	--train-manifest-list ${language}_train.csv \
 	--valid-manifest-list ${language}_valid.csv \
@@ -30,4 +34,4 @@ python end2end_asr_pytorch/train.py \
 	--shuffle \
 	--min-lr 1e-6 \
 	--k-lr 1 \
-	${continue_from}
+	${cfrom}
