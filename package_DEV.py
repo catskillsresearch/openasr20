@@ -6,7 +6,13 @@ import os, sys, tarfile
 from pathlib import Path
 from datetime import datetime
 
-release=0
+try:
+    release=os.getenv('release_number')
+    if not release:
+        release = 0
+except:
+    release = 0
+
 phase='dev'
 model='graphemes'
 sample_rate=8000
@@ -41,7 +47,7 @@ for fn,pred in zip(split_files,translations):
             row=(F,chnl,tstart,dt,token)
             ctms[ctm].append(row)
 
-shipping_dir=f'ship/{language}/{release:03d}'
+shipping_dir=f'ship/{language}/{release}'
 Path(shipping_dir).mkdir(parents=True, exist_ok=True)
 
 timestamp=datetime.today().strftime('%Y%m%d_%H%M')
@@ -55,7 +61,7 @@ for ctm in ctms:
 
 os.chdir(shipping_dir)
 
-tar_fn=f'../../catskills_openASR20_{phase}_{language}_{release:03d}.tgz'
+tar_fn=f'../../catskills_openASR20_{phase}_{language}_{release}.tgz'
 
 with tarfile.open(tar_fn, "w:gz") as tar:
     for fn in glob('*.ctm'):
