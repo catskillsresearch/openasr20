@@ -11,11 +11,11 @@ if [ $continue_from -eq 1 ]; then
 fi
 
 python end2end_asr_pytorch/train.py \
-	--train-manifest-list ${language}_train.csv \
-	--valid-manifest-list ${language}_valid.csv \
+	--train-manifest-list analysis/${language}/${language}_train.csv \
+	--valid-manifest-list analysis/${language}/${language}_valid.csv \
 	--cuda \
 	--batch-size ${batch_size} \
-	--labels-path ${language}_characters.json  \
+	--labels-path analysis/${language}/${language}_characters.json  \
 	--lr 1e-4 \
 	--name ${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4 \
 	--save-folder save \

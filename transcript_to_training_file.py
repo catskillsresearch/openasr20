@@ -28,7 +28,7 @@ val = L[len(train):]
 cases = [('train', train), ('valid', val)] # , ('test', test)]
 
 for fn, L in cases:
-    man_fn=f'{language}_{fn}.csv'
+    man_fn=f'analysis/{language}/{language}_{fn}.csv'
     with open(man_fn,'w') as f:
         f.write('\n'.join(L))
     print('saved', man_fn, 'with', len(L), 'examples')

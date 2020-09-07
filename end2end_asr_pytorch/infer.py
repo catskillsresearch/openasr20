@@ -1,20 +1,17 @@
 import json
 import time
 import numpy as np
-
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
-
 from tqdm import tqdm
 from models.asr.transformer import Transformer, Encoder, Decoder
 from utils import constant
 from utils.data_loader import SpectrogramDataset, AudioDataLoader, BucketingSampler
-from utils.optimizer import NoamOpt
 from utils.metrics import calculate_metrics, calculate_cer, calculate_wer, calculate_cer_en_zh
 from utils.functions import save_model, load_model
 from utils.lstm_utils import LM
-
+from torch.cuda.amp import GradScaler, autocast
 
 def evaluate(f, model, test_loader, lm=None):
     """
@@ -37,11 +34,12 @@ def evaluate(f, model, test_loader, lm=None):
                 src = src.cuda()
                 tgt = tgt.cuda()
 
-            batch_ids_hyps, batch_strs_hyps, batch_strs_gold = model.evaluate(
-                src, src_lengths, tgt, beam_search=constant.args.beam_search,
-                beam_width=constant.args.beam_width, beam_nbest=constant.args.beam_nbest, lm=lm,
-                lm_rescoring=constant.args.lm_rescoring, lm_weight=constant.args.lm_weight,
-                c_weight=constant.args.c_weight, verbose=constant.args.verbose)
+            with autocast():
+                batch_ids_hyps, batch_strs_hyps, batch_strs_gold = model.evaluate(
+                    src, src_lengths, tgt, beam_search=constant.args.beam_search,
+                    beam_width=constant.args.beam_width, beam_nbest=constant.args.beam_nbest, lm=lm,
+                    lm_rescoring=constant.args.lm_rescoring, lm_weight=constant.args.lm_weight,
+                    c_weight=constant.args.c_weight, verbose=constant.args.verbose)
 
             for x in range(len(batch_strs_hyps)):
                 hyp = batch_strs_hyps[x].replace(constant.EOS_CHAR, "").replace(constant.SOS_CHAR, "").replace(constant.PAD_CHAR, "")

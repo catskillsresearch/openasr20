@@ -2,13 +2,11 @@ import json
 import time
 import math
 import numpy as np
-
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
-
 from trainer.asr.trainer import Trainer
-
+from utils.optimizer import NoamOpt
 from utils import constant
 from utils.data_loader import SpectrogramDataset, AudioDataLoader, BucketingSampler
 from utils.functions import save_model, load_model, init_transformer_model, init_optimizer

@@ -10,7 +10,6 @@ from tqdm import tqdm
 from models.asr.transformer import Transformer, Encoder, Decoder
 from utils import constant
 from utils.data_loader import SpectrogramDataset, AudioDataLoader, BucketingSampler
-from utils.optimizer import NoamOpt
 from utils.metrics import calculate_metrics, calculate_cer, calculate_wer, calculate_cer_en_zh
 from utils.functions import save_model, load_model
 from utils.lstm_utils import LM

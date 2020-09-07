@@ -30,7 +30,7 @@ samples_per_word=np.array(list(sorted([x/y for x,y,z,t,a in lengths])))
 
 cutoff=samples_per_word[int(samples_per_word.shape[0]*0.95)]
 
-fn = f'{language}_samples_per_word_cutoff_95pct.json'
+fn = f'analysis/{language}/{language}_samples_per_word_cutoff_95pct.json'
 with open(fn, 'w') as f:
     json.dump({'samples_per_word_cutoff_95pct': cutoff}, f)
 

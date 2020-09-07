@@ -18,7 +18,7 @@ model='graphemes'
 sample_rate=8000
 language=os.getenv('language')
 stage='NIST'
-translation_file=f'RESULT_{language}_trimmed.txt'
+translation_file=f'analysis/{language}/RESULT_{language}_trimmed.txt'
 
 with open(translation_file, 'r', encoding='utf-8') as f:
     translations=f.readlines()

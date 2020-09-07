@@ -9,7 +9,7 @@ language=os.getenv('language')
 stage=f'NIST'
 sample_rate=8000
 
-cfn=f'{language}_samples_per_word_cutoff_95pct.json'
+cfn=f'analysis/{language}/{language}_samples_per_word_cutoff_95pct.json'
 with open(cfn,'r') as f:
     cutoff=json.load(f)['samples_per_word_cutoff_95pct']
 

@@ -5,6 +5,7 @@ class NoamOpt:
 
     def __init__(self, model_size, factor, warmup, optimizer, min_lr=1e-5):
         self.optimizer = optimizer
+        self.param_groups = optimizer.param_groups
         self._step = 0
         self.warmup = warmup
         self.factor = factor
