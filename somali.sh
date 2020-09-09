@@ -1,3 +1,1 @@
-foo.sh somali 100 5 0 ""
-
-# --continue-from ${model_dir}/best_model.th
+foo.sh somali 300 5 0 1 004
