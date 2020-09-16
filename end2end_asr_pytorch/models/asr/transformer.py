@@ -117,10 +117,6 @@ class Transformer(nn.Module):
         else:
             strs_hyps = self.decoder.greedy_search(encoder_padded_outputs)
         
-        if verbose:
-            # print("GOLD", strs_gold)
-            print("HYP", strs_hyps)
-
         return _, strs_hyps, strs_gold
 
 class Encoder(nn.Module):

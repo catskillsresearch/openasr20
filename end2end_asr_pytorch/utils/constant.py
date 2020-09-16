@@ -12,7 +12,7 @@ parser.add_argument('--valid-manifest-list', nargs='+', type=str)
 parser.add_argument('--test-manifest-list', nargs='+', type=str)
 parser.add_argument('--lang-list', nargs='+', type=str)
 
-parser.add_argument('--sample-rate', default=16000, type=int, help='Sample rate')
+parser.add_argument('--sample-rate', default=8000, type=int, help='Sample rate')
 parser.add_argument('--batch-size', default=20, type=int, help='Batch size for training')
 parser.add_argument('--num-workers', default=4, type=int, help='Number of workers used in data-loading')
 
@@ -98,7 +98,14 @@ parser.add_argument('--shuffle', action='store_true', help='Shuffle')
 torch.manual_seed(123456)
 torch.cuda.manual_seed_all(123456)
 
-args = parser.parse_args()
+import os
+
+try:
+    os.environ['IN_JUPYTER']
+    args = parser.parse_args([])
+except:
+    args = parser.parse_args()
+
 USE_CUDA = args.cuda
 
 PAD_TOKEN = 0

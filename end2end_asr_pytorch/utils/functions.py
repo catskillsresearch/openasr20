@@ -16,8 +16,8 @@ def save_model(model, epoch, opt, metrics, label2id, id2label, best_model=False)
         save_path = "{}/{}/best_model.th".format(
             constant.args.save_folder, constant.args.name)
     else:
-        save_path = "{}/{}/epoch_{}.th".format(constant.args.save_folder,
-                                               constant.args.name, epoch)
+        save_path = "{}/{}/epoch_{}_{}.th".format(constant.args.save_folder,
+                                                  constant.args.name, epoch, os.getpid())
 
     if not os.path.exists(constant.args.save_folder + "/" + constant.args.name):
         os.makedirs(constant.args.save_folder + "/" + constant.args.name)

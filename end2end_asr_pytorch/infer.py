@@ -3,7 +3,6 @@ import time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
 from tqdm import tqdm
 from models.asr.transformer import Transformer, Encoder, Decoder
 from utils import constant
@@ -11,7 +10,6 @@ from utils.data_loader import SpectrogramDataset, AudioDataLoader, BucketingSamp
 from utils.metrics import calculate_metrics, calculate_cer, calculate_wer, calculate_cer_en_zh
 from utils.functions import save_model, load_model
 from utils.lstm_utils import LM
-from torch.cuda.amp import GradScaler, autocast
 
 def evaluate(f, model, test_loader, lm=None):
     """
@@ -22,27 +20,23 @@ def evaluate(f, model, test_loader, lm=None):
     """
     model.eval()
 
-    total_word, total_char, total_cer, total_wer = 0, 0, 0, 0
-    total_en_cer, total_zh_cer, total_en_char, total_zh_char = 0, 0, 0, 0
-
     with torch.no_grad():
-        test_pbar = tqdm(iter(test_loader), leave=True, total=len(test_loader))
-        for i, (data) in enumerate(test_pbar):
+        for i, (data) in enumerate(test_loader):
             src, tgt, src_percentages, src_lengths, tgt_lengths = data
 
             if constant.USE_CUDA:
                 src = src.cuda()
                 tgt = tgt.cuda()
 
-            with autocast():
-                batch_ids_hyps, batch_strs_hyps, batch_strs_gold = model.evaluate(
-                    src, src_lengths, tgt, beam_search=constant.args.beam_search,
-                    beam_width=constant.args.beam_width, beam_nbest=constant.args.beam_nbest, lm=lm,
-                    lm_rescoring=constant.args.lm_rescoring, lm_weight=constant.args.lm_weight,
-                    c_weight=constant.args.c_weight, verbose=constant.args.verbose)
+            batch_ids_hyps, batch_strs_hyps, batch_strs_gold = model.evaluate(
+                src, src_lengths, tgt, beam_search=constant.args.beam_search,
+                beam_width=constant.args.beam_width, beam_nbest=constant.args.beam_nbest, lm=lm,
+                lm_rescoring=constant.args.lm_rescoring, lm_weight=constant.args.lm_weight,
+                c_weight=constant.args.c_weight, verbose=constant.args.verbose)
 
             for x in range(len(batch_strs_hyps)):
                 hyp = batch_strs_hyps[x].replace(constant.EOS_CHAR, "").replace(constant.SOS_CHAR, "").replace(constant.PAD_CHAR, "")
+                print("HYP ", hyp)
                 f.write(f'{hyp}\n')
                 f.flush()
                 

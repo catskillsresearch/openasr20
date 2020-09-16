@@ -1,1 +1,2 @@
-foobar.sh amharic 300 7 0 1 003
+foobar1.sh amharic 500 5 0 1 007
+

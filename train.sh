@@ -18,6 +18,7 @@ python end2end_asr_pytorch/train.py \
 	--labels-path analysis/${language}/${language}_characters.json  \
 	--lr 1e-4 \
 	--name ${language}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4 \
+	--sample_rate 8000 \
 	--save-folder save \
 	--epochs ${n_epochs} \
 	--save-every 1 \
