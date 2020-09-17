@@ -2,6 +2,13 @@ import os
 
 class Config:
 
+    def __init__(self):
+        self.stage='NIST'
+        self.sample_rate=8000
+        self.batch_size=12
+        self.n_epochs=3
+        self.save_every = 1
+
     def update(self):
         self.model_name=f'{self.language}_{self.sample_rate}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4'
         self.model_dir=f'save/{self.model_name}'
@@ -17,12 +24,4 @@ class Config:
 
 C=Config()
 
-C.stage='NIST'
-C.language='amharic'
-C.sample_rate=8000
-C.batch_size=6
-C.n_epochs=3
-C.release='009'
-C.recording='BABEL_OP3_307_82140_20140513_191321_inLine'
-C.update()
 

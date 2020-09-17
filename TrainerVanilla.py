@@ -141,6 +141,7 @@ class TrainerVanilla():
             history.append(metrics)
 
             if epoch % constant.args.save_every == 0:
+                os.environ['SAMPLE_SIZE']=str(len(train_sampler.bins))
                 save_model(model, (epoch+1), opt, metrics,
                         label2id, id2label, best_model=False)
 
@@ -148,3 +149,7 @@ class TrainerVanilla():
                            label2id, id2label, best_model=True)
             
             train_sampler.shuffle(epoch)
+
+        if epoch % constant.args.save_every != 0:
+            save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=False)
+            save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=True)

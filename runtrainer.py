@@ -18,7 +18,7 @@ def runtrainer(C, samples, n_epochs, batch_size):
 	--sample-rate {C.sample_rate} \
 	--save-folder save \
 	--epochs {n_epochs} \
-	--save-every 1 \
+	--save-every {C.save_every} \
 	--feat_extractor vgg_cnn \
 	--dropout 0.1 \
 	--num-layers 4 \

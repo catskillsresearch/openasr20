@@ -16,8 +16,15 @@ def save_model(model, epoch, opt, metrics, label2id, id2label, best_model=False)
         save_path = "{}/{}/best_model.th".format(
             constant.args.save_folder, constant.args.name)
     else:
-        save_path = "{}/{}/epoch_{}_{}.th".format(constant.args.save_folder,
-                                                  constant.args.name, epoch, os.getpid())
+        try:
+            sample_size=f"_{os.getenv('SAMPLE_SIZE')}"
+        except:
+            sample_size=''
+        save_path = "{}/{}/epoch_{}_{}{}.th".format(constant.args.save_folder,
+                                                    constant.args.name,
+                                                    epoch,
+                                                    os.getpid(),
+                                                    sample_size)
 
     if not os.path.exists(constant.args.save_folder + "/" + constant.args.name):
         os.makedirs(constant.args.save_folder + "/" + constant.args.name)

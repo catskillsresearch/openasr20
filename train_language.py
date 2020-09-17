@@ -1,9 +1,9 @@
+import os, librosa
 from glob import glob
-import librosa
 import numpy as np
 from runtrainer import runtrainer
 
-def train_language(C):
+def train_language(C, one_shot = False):
 
     os.system("/bin/rm -rf runs")
     files=glob(f'{C.nr_dir}/*')
@@ -21,3 +21,6 @@ def train_language(C):
         print("------------------------------------------------")
         print(f"[{i}] batch_size {bs} samples {end}")
         runtrainer(C, [y for x,y in samples[0:end]], max(2,10-i), batch_size[i])
+        if one_shot:
+            return
+        
