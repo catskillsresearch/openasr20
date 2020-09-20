@@ -7,6 +7,8 @@ from utils.functions import save_model
 from torch.utils.tensorboard import SummaryWriter
 from utils.metrics import calculate_metrics, calculate_cer, calculate_wer, calculate_cer_en_zh
 
+from torch.cuda.amp import GradScaler, autocast # Tensor Cores
+
 class TrainerVanilla():
     """
     Trainer class
@@ -39,6 +41,8 @@ class TrainerVanilla():
         epoch = start_epoch - 1
         CER = 100000000
         threshhold = 1
+        scaler = GradScaler()		# Tensor Cores
+
         while CER > threshhold:
             epoch = epoch + 1
             sys.stdout.flush()
@@ -108,12 +112,16 @@ class TrainerVanilla():
                     total_char += len(strs_gold[j].replace(' ', ''))
                     total_word += len(strs_gold[j].split(" "))
 
-                loss.backward()
+                # loss.backward()
+                scaler.scale(loss).backward()	# Tensor Cores
 
                 if constant.args.clip:
+                    scaler.unscale_(opt)	# Tensor Cores
                     torch.nn.utils.clip_grad_norm_(model.parameters(), constant.args.max_norm)
                 
-                opt.step()
+                # opt.step()
+                scaler.step(opt)		# Tensor Cores
+                scaler.update()			# Tensor Cores
 
                 total_loss += loss.item()
                 non_pad_mask = gold.ne(constant.PAD_TOKEN)
@@ -141,7 +149,6 @@ class TrainerVanilla():
             history.append(metrics)
 
             if epoch % constant.args.save_every == 0:
-                os.environ['SAMPLE_SIZE']=str(len(train_sampler.bins))
                 save_model(model, (epoch+1), opt, metrics,
                         label2id, id2label, best_model=False)
 

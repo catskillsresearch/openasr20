@@ -14,13 +14,21 @@ def train_language(C, one_shot = False):
     sample_ends=(n_samples*np.arange(sieve)/sieve).astype(int).tolist()[1:]+[n_samples]
 
     # Hand tune when it breaks
-    batch_size = {i: C.batch_size for i in range(len(sample_ends))}
-
+    batch_size = np.array([C.batch_size for i in range(len(sample_ends))])
     for i, end in enumerate(sample_ends):
+        if i < C.start_from:
+            continue
         bs = batch_size[i]
         print("------------------------------------------------")
         print(f"[{i}] batch_size {bs} samples {end}")
+        os.environ['SAMPLE_SIZE']=str(end)
+        os.environ[f'FINISH_{C.language}']='No'
         runtrainer(C, [y for x,y in samples[0:end]], max(2,10-i), batch_size[i])
+        if os.getenv(f'FINISH_{C.language}')=='No':
+            batch_size[i:] -= 1
+            runtrainer(C, [y for x,y in samples[0:end]], max(2,10-i), batch_size[i])
+            if os.getenv(f'FINISH_{C.language}')=='No':
+                print("ERROR in batch")
+                quit()
         if one_shot:
             return
-        

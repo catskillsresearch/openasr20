@@ -1,4 +1,5 @@
 import numpy as np
+from normalize import normalize
 
 def clip_ends(audio, clip=.0005):
     audio2 = audio**2
@@ -24,4 +25,4 @@ def clip_ends(audio, clip=.0005):
 
     y += 100
 
-    return audio[x:y]
+    return normalize(audio[x:y])

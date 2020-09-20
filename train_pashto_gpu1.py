@@ -3,6 +3,7 @@ from train_language import train_language
 C.language='pashto'
 C.batch_size=6
 C.save_every = 25
+C.start_from = 15
 C.update()
 train_language(C)
 

@@ -16,10 +16,7 @@ def save_model(model, epoch, opt, metrics, label2id, id2label, best_model=False)
         save_path = "{}/{}/best_model.th".format(
             constant.args.save_folder, constant.args.name)
     else:
-        try:
-            sample_size=f"_{os.getenv('SAMPLE_SIZE')}"
-        except:
-            sample_size=''
+        sample_size=f"_{os.getenv('SAMPLE_SIZE')}"
         save_path = "{}/{}/epoch_{}_{}{}.th".format(constant.args.save_folder,
                                                     constant.args.name,
                                                     epoch,

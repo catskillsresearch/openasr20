@@ -33,3 +33,5 @@ def runtrainer(C, samples, n_epochs, batch_size):
 	--min-lr 1e-6 \
 	--k-lr 1 \
 	{C.cfrom}""")
+
+    os.environ[f'FINISH_{C.language}']='Yes'
