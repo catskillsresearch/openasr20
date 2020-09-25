@@ -14,23 +14,22 @@ from AudioTranscriptionSample import AudioTranscriptionSample
 class SplitCorpus (Corpus):
 
     def __init__(self, _config, _recordings):
-        self.split_from = _recordings
-        self.split_from_roots=[os.path.basename(x)[0:-4] for x in self.split_from.build_transcription_filenames]
+        split_from_roots=[x.key for x in _recordings.artifacts]
         self.build_transcription_dir=f'{_config.build_dir}/transcription_split'
-        self.build_transcription_filenames=glob(f'{self.build_transcription_dir}/*.txt')
-        self.build_roots = [os.path.basename(x)[0:-4] for x in self.build_transcription_filenames]
-        self.N_splits_per_root=[len([x for x in self.build_roots if x.startswith(y)]) for y in self.split_from_roots]
-        self.build_targets = [text_of_file(x) for x in tqdm(self.build_transcription_filenames)]
+        build_transcription_filenames=glob(f'{self.build_transcription_dir}/*.txt')
+        build_roots = [os.path.basename(x)[0:-4] for x in build_transcription_filenames]
+        self.N_splits_per_root=[len([x for x in build_roots if x.startswith(y)]) for y in split_from_roots]
+        build_targets = [text_of_file(x) for x in tqdm(build_transcription_filenames)]
         self.build_audio_nr_dir=f'{_config.build_dir}/audio_split_{_config.sample_rate}'
-        self.build_audio_nr_filenames=[f'{self.build_audio_nr_dir}/{x}.wav' for x in self.build_roots]
-        self.build_sources = [librosa.load(src_fn, sr=_config.sample_rate)[0] for src_fn in tqdm(self.build_audio_nr_filenames)]
-        artifacts = [AudioTranscriptionSample(_config, key, afn, audio, tfn, transcription)
+        build_audio_nr_filenames=[f'{self.build_audio_nr_dir}/{x}.wav' for x in build_roots]
+        build_sources = [librosa.load(src_fn, sr=_config.sample_rate)[0] for src_fn in tqdm(build_audio_nr_filenames)]
+        artifacts = [AudioTranscriptionSample(_config, key.split('Line_')[0]+'Line', key, afn, audio, tfn, transcription)
                      for key, afn, audio, tfn, transcription
-                     in zip(self.build_roots,
-                            self.build_audio_nr_filenames,
-                            self.build_sources,
-                            self.build_transcription_filenames,
-                            self.build_targets)]
+                     in zip(build_roots,
+                            build_audio_nr_filenames,
+                            build_sources,
+                            build_transcription_filenames,
+                            build_targets)]
         super().__init__(_config, artifacts)
         self.analysis()
         
