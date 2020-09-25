@@ -55,17 +55,19 @@ class Language:
                 (corpus, measurement, 'Max', np.max(samples))]
         
     def language_report_visualization(self):
-        plot_log_population(self.samples_per_grapheme, 'Audio samples per grapheme', 'Samples/grapheme', 'Graphemes that are this long in samples', 100)
-        plot_log_population(self.N_splits_per_root, 'Splits per 10-minute recording', '# splits per recording', '# recordings with this many splits', 100)
-        plot_log_population(self.split_length_in_words, 'Splits with this many words', 'word length', 'splits', 100)
-        plot_log_population(self.split_length_in_graphemes, "splits with this many graphemes", 'grapheme length', 'splits', 100)
-        plot_log_population(self.split_length_in_seconds, "Splits with this many seconds length", 'sample length (seconds)', 'splits', 100)
-        plot_log_population(self.word_lengths_in_graphemes, 'Word lengths', 'Graphemes/word', 'Words with this many graphemes', 12)
-        plot_log_population(self.split_length_in_seconds, 'Split length in seconds', 'Seconds/split', 'Samples that are this long in seconds', 100)
-        plot_log_population(self.split_length_in_words, 'Split length in words', 'Words/split', 'Samples that are this long in words', 100)
-        plot_log_population(self.split_length_in_graphemes, 'Split length in graphemes', 'Graphemes/split', 'Samples that are this long in graphemes', 100)
-        plot_log_population(self.samples_per_word, 'Audio samples per word', 'Samples/word', 'Words that are this long in samples', 100)
-        
+        print('UNIVERSAL')
+        plot_log_population(self.word_lengths_in_graphemes, 'Word lengths',                         'Graphemes/word', 'Words with this many graphemes', 12)
+
+        print('RECORDINGS')
+        plot_log_population(self.N_splits_per_root,         'Splits per 10-minute recording',       '# splits per recording', '# recordings with this many splits', 100)
+
+        print('SPLIT CORPUS')
+        plot_log_population(self.samples_per_grapheme,      'Audio samples per grapheme',           'Samples/grapheme', 'Graphemes that are this long in samples', 100)        
+        plot_log_population(self.samples_per_word,          'Audio samples per word',               'Samples/word', 'Words that are this long in samples', 100)
+        plot_log_population(self.split_length_in_words,     'Splits with this many words',          'word length', 'splits', 100)
+        plot_log_population(self.split_length_in_graphemes, "splits with this many graphemes",      'grapheme length', 'splits', 100)
+        plot_log_population(self.split_length_in_seconds,   "Splits with this many seconds length", 'sample length (seconds)', 'splits', 100)
+
     def language_report_statistics(self):
         C = ['Corpus', 'Units', 'Measurement', 'Value']
         R = [('Recordings', '#Recordings', '10-minute training recordings',    	   self.N_recordings),
