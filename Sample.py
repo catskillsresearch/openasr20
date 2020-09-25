@@ -1,5 +1,6 @@
 class Sample:
 
-    def __init__(self, _source, _target):
+    def __init__(self, _key, _source, _target):
+        self.key = _key
         self.source=_source
-        self.taget=_target
+        self.target=_target
