@@ -15,3 +15,11 @@ class AudioTranscriptionSample(Sample):
         return AudioTranscriptionSample(self.source.C, self.root, self.key,
                                         self.source.filename, audio,
                                         self.target.filename, self.target.value)
+
+    def display(self):
+        print('KEY', self.key)
+        print('SOURCE')
+        self.source.display(self.target.romanized)
+        print('TARGET')
+        self.target.display()
+        print()

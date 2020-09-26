@@ -12,11 +12,16 @@ class AudioArtifact (Artifact):
         self.n_samples = _value.shape[0]
         self.n_seconds = self.n_samples/_config.sample_rate
 
-    def display(self):
+    def display(self, transcription = None):
         display(Audio(self.value, rate=self.C.sample_rate))
         plt.figure(figsize=(15,4))
         T = np.arange(self.n_samples)/self.C.sample_rate
         plt.plot(T, self.value);
         plt.xlabel('seconds')
         plt.ylabel('amplitude');
-        plt.title(self.filename)
+        if transcription:
+            plt.title(transcription)
+        elif self.filename:
+            plt.title(self.filename)            
+        plt.show()
+        plt.close()
