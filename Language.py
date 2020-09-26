@@ -8,7 +8,7 @@ class Language:
     def __init__(self, _language):
         self.C = Cfg('NIST', 8000, _language) 
         self.recordings = RecordingCorpus(self.C)
-        self.splits = SplitCorpus(self.C, self.recordings)
+        self.splits = SplitCorpus.from_split_directory(self.C)
 
     def visualization(self):
         self.recordings.visualization()

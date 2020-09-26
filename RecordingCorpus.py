@@ -8,9 +8,8 @@ from AudioTranscriptionSample import AudioTranscriptionSample
 class RecordingCorpus (Corpus):
 
     def __init__(self, _config):
-        self.build_transcription_dir=f'{_config.build_dir}/transcription'
-        build_transcription_filenames=glob(f'{self.build_transcription_dir}/*.txt')
-        self.build_audio_dir=f'{_config.build_dir}/audio'
+        build_transcription_dir=f'{_config.build_dir}/transcription'
+        build_transcription_filenames=glob(f'{build_transcription_dir}/*.txt')
         build_audio_filenames=[fn.replace('/audio/', '/transcription/').replace('.txt','.wav') for fn in build_transcription_filenames]
         artifacts = [AudioTranscriptionSample(_config,
                                               os.path.basename(afn)[0:-4],

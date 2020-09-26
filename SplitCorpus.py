@@ -2,34 +2,42 @@ import librosa, os
 import numpy as np
 import pandas as pd
 from glob import glob
-from tqdm import tqdm
+from tqdm.notebook import tqdm
 from ArtifactsVector import ArtifactsVector
 from AudioTranscriptionSample import AudioTranscriptionSample
 from Corpus import Corpus
 from plot_log_population import plot_log_population
 from sample_statistics import sample_statistics as stats
 from text_of_file import text_of_file
+from aggressive_clip_ends import aggressive_clip_ends as ace
 
 class SplitCorpus (Corpus):
+    
+    def __init__(self, _config, _artifacts):
+        super().__init__(_config, _artifacts)
+        self.population = ArtifactsVector(_config, self.artifacts)
 
-    def __init__(self, _config, _recordings):
-        self.build_transcription_dir=f'{_config.build_dir}/transcription_split'
-        build_transcription_filenames=glob(f'{self.build_transcription_dir}/*.txt')
+    @classmethod
+    def from_split_directory(cls, _config):
+        build_transcription_dir=f'{_config.build_dir}/transcription_split'
+        build_transcription_filenames=glob(f'{build_transcription_dir}/*.txt')
         build_roots = [os.path.basename(x)[0:-4] for x in build_transcription_filenames]
-
         build_targets = [text_of_file(x) for x in tqdm(build_transcription_filenames)]
-        self.build_audio_nr_dir=f'{_config.build_dir}/audio_split_{_config.sample_rate}'
-        build_audio_nr_filenames=[f'{self.build_audio_nr_dir}/{x}.wav' for x in build_roots]
+        build_audio_nr_dir=f'{_config.build_dir}/audio_split_{_config.sample_rate}'
+        build_audio_nr_filenames=[f'{build_audio_nr_dir}/{x}.wav' for x in build_roots]
         build_sources = [librosa.load(src_fn, sr=_config.sample_rate)[0] for src_fn in tqdm(build_audio_nr_filenames)]
-        artifacts = [AudioTranscriptionSample(_config, key.split('Line_')[0]+'Line', key, afn, audio, tfn, transcription)
+        _artifacts = [AudioTranscriptionSample(_config, key.split('Line_')[0]+'Line', key, afn, audio, tfn, transcription)
                      for key, afn, audio, tfn, transcription
                      in zip(build_roots,
                             build_audio_nr_filenames,
                             build_sources,
                             build_transcription_filenames,
                             build_targets)]
-        super().__init__(_config, artifacts)
-        self.population = ArtifactsVector(_config, self.artifacts)
+        return cls(_config, _artifacts)
+
+    def aggressive_clip_ends(self):
+        _artifacts = [x.aggressive_clip_ends() for x in tqdm(self.artifacts)]
+        return SplitCorpus(self.C, _artifacts)
 
     def visualization(self):
         plot_log_population(self.population.N_splits_per_root,         'Splits per 10-minute recording',       '# splits per recording', '# recordings with this many splits', 100)

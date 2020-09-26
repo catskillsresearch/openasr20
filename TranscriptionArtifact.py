@@ -1,5 +1,6 @@
 from Artifact import Artifact
 from tokenizer import tokenizer
+from unidecode import unidecode
 
 class TranscriptionArtifact (Artifact):
 
@@ -10,3 +11,7 @@ class TranscriptionArtifact (Artifact):
         self.tokens = tokenizer(_value)
         self.n_words = len(self.tokens)
         self.n_graphemes = len(_value)
+        self.romanized = unidecode(self.value)
+
+    def display(self):
+        print(self.value, '::', self.romanized)
