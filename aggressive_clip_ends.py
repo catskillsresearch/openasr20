@@ -7,7 +7,7 @@ from clip_ends import clip_ends
 
 def aggressive_clip_ends(audio, sample_rate):
     window = 2048
-    if audio.shape[0] < window:
+    if audio.shape[0] < window-100:
         return normalize(audio)
     N=10
     cutoff=np.max(audio[0:20])
