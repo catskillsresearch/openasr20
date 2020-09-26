@@ -5,12 +5,12 @@ import noisereduce as nr
 from normalize import normalize
 from clip_ends import clip_ends
 
-def aggressive_clip_ends(audio, sample_rate):
+def aggressive_clip_ends(audio, sample_rate, _cutoff = None):
     window = 2048
     if audio.shape[0] < window-100:
         return normalize(audio)
     N=10
-    cutoff=np.max(audio[0:20])
+    cutoff=_cutoff if _cutoff else np.max(audio[0:20])
     silence_mask=np.abs(audio) < cutoff
     groups = [[i for i, _ in group] for key, group in groupby(enumerate(silence_mask), key=itemgetter(1)) if key]
     boundaries=[(x[0],x[-1]) for x in groups]

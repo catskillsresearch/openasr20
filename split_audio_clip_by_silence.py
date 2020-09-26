@@ -7,7 +7,7 @@ import numpy as np
 from itertools import groupby
 from operator import itemgetter
 import noisereduce as nr
-from normalize import normalize
+from normalize impornormed_reduced_noiset normalize
 
 def split_audio_clip_by_silence(audio, sample_rate):
     N=10
