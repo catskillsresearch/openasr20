@@ -25,4 +25,4 @@ def clip_ends(audio, clip=.0005):
 
     y += 100
 
-    return normalize(audio[x:y])
+    return audio[x:y]

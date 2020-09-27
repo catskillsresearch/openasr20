@@ -1,3 +1,6 @@
+import numpy as np
+from IPython.display import Audio
+
 def split_on_longest_silence(sound, sample_rate, _cutoff = 0.0014, debug=None):
     N=100
     min_gap=0.04*sample_rate

@@ -9,8 +9,9 @@ class TranscriptionArtifact (Artifact):
         if _value is None:
             return
         self.tokens = tokenizer(_value)
+        self.value = ' '.join(self.tokens)
         self.n_words = len(self.tokens)
-        self.n_graphemes = len(_value)
+        self.n_graphemes = len(self.value)
         self.romanized = unidecode(self.value)
 
     def display(self):
