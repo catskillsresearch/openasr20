@@ -78,6 +78,10 @@ class SplitCorpus (Corpus):
         df_new = new.sample_statistics()
         df = pd.merge(df_old, df_new, how='inner', on=df_old.columns.values.tolist()[0:-1])
         return df[df.Value_x != df.Value_y]
+    
+    def check_vocabulary_change(self, new):
+        return list(sorted(set(self.population.all_words).difference(set(new.population.all_words))))
+
 
 
     

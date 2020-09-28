@@ -3,8 +3,11 @@ import matplotlib.pylab as plt
 import scipy.stats as stats
 
 def plot_log_population2(population_old, population_new, _title, _xlabel, _ylabel, _bins):
-    if np.allclose(population_old, population_new):
-        return
+    try:
+        if np.allclose(population_old, population_new):
+            return
+    except:
+        pass
     plt.figure(figsize=(10,5))
 
     if False:
