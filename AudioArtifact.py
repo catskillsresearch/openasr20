@@ -5,10 +5,8 @@ from Artifact import Artifact
 
 class AudioArtifact (Artifact):
 
-    def __init__(self, _config,  _filename, _value):
-        super().__init__(_config, _filename, _value)
-        if _value is None:
-            return
+    def __init__(self, _config,  _value):
+        super().__init__(_config, _value)
         self.n_samples = _value.shape[0]
         self.n_seconds = self.n_samples/_config.sample_rate
 
@@ -19,9 +17,6 @@ class AudioArtifact (Artifact):
         plt.plot(T, self.value);
         plt.xlabel('seconds')
         plt.ylabel('amplitude');
-        if transcription:
-            plt.title(transcription)
-        elif self.filename:
-            plt.title(self.filename)            
+        plt.title(transcription)
         plt.show()
         plt.close()

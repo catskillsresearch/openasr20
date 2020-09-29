@@ -25,4 +25,4 @@ def clip_ends(audio, clip=.0005):
 
     y += 100
 
-    return audio[x:y]
+    return audio[x:y], (x,y)

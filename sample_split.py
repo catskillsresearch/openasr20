@@ -1,6 +1,6 @@
 import numpy as np
 from split_on_longest_median_low_energy_point import split_on_longest_median_low_energy_point
-from AudioTranscriptionSample import AudioTranscriptionSample
+from AudioTextSample import AudioTextSample
 
 def sample_split(artifact, target_max_sample_length, split_on = 'tokens'):
     sound=artifact.source.value
@@ -35,6 +35,6 @@ def sample_split(artifact, target_max_sample_length, split_on = 'tokens'):
     right_tokens = tokens[left_boundary+1:]
     right_text=' '.join(right_tokens)
     key = artifact.key
-    left_sample = AudioTranscriptionSample(C, key, key+'L', None, left_audio, None, left_text)
-    right_sample = AudioTranscriptionSample(C, key, key+'R', None, right_audio, None, right_text)
+    left_sample = AudioTextSample(C, key, key+'L', None, left_audio, None, left_text)
+    right_sample = AudioTextSample(C, key, key+'R', None, right_audio, None, right_text)
     return [left_sample, right_sample]

@@ -8,7 +8,7 @@ from clip_ends import clip_ends
 def aggressive_clip_ends(audio, sample_rate, _cutoff = None):
     window = 2048
     if audio.shape[0] < window-100:
-        return normalize(audio)
+        return normalize(audio), (0, len(audio))
     N=10
     cutoff=_cutoff if _cutoff else np.max(audio[0:20])
     silence_mask=np.abs(audio) < cutoff
@@ -16,7 +16,7 @@ def aggressive_clip_ends(audio, sample_rate, _cutoff = None):
     boundaries=[(x[0],x[-1]) for x in groups]
     silences=[(x/sample_rate,(y-N)/sample_rate) for x,y in boundaries if y-x > window]
     if not len(silences):
-        return normalize(audio)
+        return normalize(audio), (0, len(audio))
     longest_noise=sorted([(y-x,(x,y)) for x,y in silences])[-1][1]
     noisy_segment=tuple(int(x*sample_rate) for x in longest_noise)
     noisy_part = audio[noisy_segment[0]:min(noisy_segment[0]+window, noisy_segment[1])]

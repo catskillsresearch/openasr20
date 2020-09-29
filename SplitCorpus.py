@@ -2,9 +2,9 @@ import librosa, os
 import numpy as np
 import pandas as pd
 from glob import glob
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 from ArtifactsVector import ArtifactsVector
-from AudioTranscriptionSample import AudioTranscriptionSample
+from AudioTextSample import AudioTextSample
 from Corpus import Corpus
 from plot_log_population import plot_log_population
 from plot_log_population2 import plot_log_population2
@@ -12,32 +12,20 @@ from sample_statistics import sample_statistics as stats
 from text_of_file import text_of_file
 from aggressive_clip_ends import aggressive_clip_ends as ace
 
+def xace(x):
+    return x.aggressive_clip_ends()
+
 class SplitCorpus (Corpus):
     
-    def __init__(self, _config, _artifacts):
+    def __init__(self, _config, _recordings):
+        _artifacts = []
+        for artifact in _recordings.artifacts:
+            _artifacts.extend(artifact.split())
         super().__init__(_config, _artifacts)
         self.population = ArtifactsVector(_config, self.artifacts)
 
-    @classmethod
-    def from_split_directory(cls, _config):
-        build_transcription_dir=f'{_config.build_dir}/transcription_split'
-        build_transcription_filenames=glob(f'{build_transcription_dir}/*.txt')
-        build_roots = [os.path.basename(x)[0:-4] for x in build_transcription_filenames]
-        build_targets = [text_of_file(x) for x in tqdm(build_transcription_filenames)]
-        build_audio_nr_dir=f'{_config.build_dir}/audio_split_{_config.sample_rate}'
-        build_audio_nr_filenames=[f'{build_audio_nr_dir}/{x}.wav' for x in build_roots]
-        build_sources = [librosa.load(src_fn, sr=_config.sample_rate)[0] for src_fn in tqdm(build_audio_nr_filenames)]
-        _artifacts = [AudioTranscriptionSample(_config, key.split('Line_')[0]+'Line', key, afn, audio, tfn, transcription)
-                     for key, afn, audio, tfn, transcription
-                     in zip(build_roots,
-                            build_audio_nr_filenames,
-                            build_sources,
-                            build_transcription_filenames,
-                            build_targets)]
-        return cls(_config, _artifacts)
-
-    def aggressive_clip_ends(self):
-        _artifacts = [x.aggressive_clip_ends() for x in tqdm(self.artifacts)]
+    def aggressive_clip_ends(self, pool):
+        _artifacts = list(tqdm(pool.imap(xace, self.artifacts), total=len(self.artifacts)))
         return SplitCorpus(self.C, _artifacts)
 
     def visualization(self):
@@ -81,7 +69,3 @@ class SplitCorpus (Corpus):
     
     def check_vocabulary_change(self, new):
         return list(sorted(set(self.population.all_words).difference(set(new.population.all_words))))
-
-
-
-    
