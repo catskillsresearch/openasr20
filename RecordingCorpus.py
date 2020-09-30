@@ -14,7 +14,7 @@ class RecordingCorpus (Corpus):
         super().__init__(_config, artifacts)
 
     def visualization(self):
-        pass
+        return
 
     def sample_statistics(self):
         R = [('Recordings', '#Recordings', '10-minute recordings',    	   self.n_artifacts),

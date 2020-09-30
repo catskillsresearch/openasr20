@@ -16,11 +16,12 @@ def split_on_longest_median_low_energy_point(sound, window = 100, threshold = 0.
     boundaries=[(x[0],x[-1]) for x in groups]
     silences=[(x,y) for x,y in boundaries if y-x > min_gap]
     if not silences:
-        return [sound, None]
+        return [(sound, 0, sound.shape[0]), None]
     longest_silence=list(sorted([(y-x,(x,y)) for x,y in silences]))[-1][1]
     start,end = longest_silence
     if end-start < window:
-        return [sound, None]
+        return [(sound, 0, sound.shape[0]), None]
     midpoint = start + (end-start)//2
-    return [clip_ends(sound[0:midpoint], clip), clip_ends(sound[midpoint:], clip)]
-
+    left, (startL, endL) = clip_ends(sound[0:midpoint], clip)
+    right, (startR, endR) = clip_ends(sound[midpoint:], clip)
+    return [(left, startL, endL), (right, midpoint+startR, midpoint+endR)]

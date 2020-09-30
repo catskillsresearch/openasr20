@@ -24,6 +24,6 @@ def split_artifact(config, median_words_in_sample, artifact):
     C=[np.hstack(B[phrase_groups[i]:phrase_groups[i+1]]) for i in range(phrase_groups.shape[0]-1)]
     T=[' '.join(tokens[phrase_groups[i]:phrase_groups[i+1]]) for i in range(phrase_groups.shape[0]-1)]
     key = artifact.key
-    S = [AudioTextSample(config, key, f'{key}_{i}', None, audio, None, text)
+    S = [AudioTextSample(config, artifact, i, audio, text)
          for i, (audio, text) in enumerate(zip(C, T))]
     return S

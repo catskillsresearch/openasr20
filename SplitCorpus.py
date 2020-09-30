@@ -12,20 +12,21 @@ from sample_statistics import sample_statistics as stats
 from text_of_file import text_of_file
 from aggressive_clip_ends import aggressive_clip_ends as ace
 
-def xace(x):
-    return x.aggressive_clip_ends()
-
 class SplitCorpus (Corpus):
     
-    def __init__(self, _config, _recordings):
+    def __init__(self, _config, _artifacts):
+        super().__init__(_config, _artifacts)
+        self.population = ArtifactsVector(_config, _artifacts)
+
+    @classmethod
+    def from_recordings(cls, _config, _recordings):
         _artifacts = []
         for artifact in _recordings.artifacts:
             _artifacts.extend(artifact.split())
-        super().__init__(_config, _artifacts)
-        self.population = ArtifactsVector(_config, self.artifacts)
-
-    def aggressive_clip_ends(self, pool):
-        _artifacts = list(tqdm(pool.imap(xace, self.artifacts), total=len(self.artifacts)))
+        return cls(_config, _artifacts)
+    
+    def aggressive_clip_ends(self):
+        _artifacts = [x.aggressive_clip_ends() for x in tqdm(self.artifacts)]
         return SplitCorpus(self.C, _artifacts)
 
     def visualization(self):
@@ -46,8 +47,6 @@ class SplitCorpus (Corpus):
         return pd.DataFrame(R, columns=self.columns).sort_values(by=['Corpus', 'Units', 'Measurement']).reset_index(drop=True)
 
     def diff_visualization(self, new):
-        plot_log_population2(self.population.N_splits_per_root, new.population.N_splits_per_root,
-                             'Splits per 10-minute recording', '# splits per recording', '# recordings with this many splits', 100)
         plot_log_population2(self.population.word_lengths_in_graphemes, new.population.word_lengths_in_graphemes,
                              'Word lengths', 'Graphemes/word', 'Words with this many graphemes', 12)
         plot_log_population2(self.population.samples_per_grapheme, new.population.samples_per_grapheme,
