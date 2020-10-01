@@ -15,7 +15,7 @@ class AudioArtifact (Artifact):
         self.calc_stats()
 
     def aggressively_clip(self):
-        self.value = aggressive_clip_ends(clip, C.sample_rate)[0]
+        self.value = aggressive_clip_ends(self.value, self.C.sample_rate)[0]
         self.calc_stats()
         
     def display(self, transcription = None):

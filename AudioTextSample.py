@@ -10,7 +10,7 @@ class AudioTextSample(Sample):
                          PhraseArtifact(_config, _transcription))
 
     def aggressively_clip(self):
-        source.aggressively_clip()
+        self.source.aggressively_clip()
 
     def display(self):
         print('KEY', self.key)
