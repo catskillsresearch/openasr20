@@ -18,7 +18,7 @@ class SubSplitCorpus(SplitCorpus):
                 R.append(split_artifact(C, median_words_in_sample, artifact))
             except:
                 problems.append(artifact)
-        split_artifacts = [item for sublist in R for item in sublist]
+        split_artifacts = [item.aggressively_clip() for sublist in R for item in sublist]
         super().__init__(C, split_artifacts)
         self.median_words_in_sample=median_words_in_sample
         self.problems = problems

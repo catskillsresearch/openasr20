@@ -10,7 +10,6 @@ from plot_log_population import plot_log_population
 from plot_log_population2 import plot_log_population2
 from sample_statistics import sample_statistics as stats
 from text_of_file import text_of_file
-from aggressive_clip_ends import aggressive_clip_ends as ace
 
 class SplitCorpus (Corpus):
     
@@ -25,10 +24,6 @@ class SplitCorpus (Corpus):
             _artifacts.extend(artifact.split())
         return cls(_config, _artifacts)
     
-    def aggressive_clip_ends(self):
-        _artifacts = [x.aggressive_clip_ends() for x in tqdm(self.artifacts)]
-        return SplitCorpus(self.C, _artifacts)
-
     def visualization(self):
         plot_log_population(self.population.N_splits_per_root,         'Splits per 10-minute recording',       '# splits per recording', '# recordings with this many splits', 100)
         plot_log_population(self.population.word_lengths_in_graphemes, 'Word lengths',                         'Graphemes/word', 'Words with this many graphemes', 12)
