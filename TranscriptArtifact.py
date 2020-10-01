@@ -13,6 +13,9 @@ class TranscriptArtifact (Artifact):
         _value = txt_to_stm(transcript_df, file, channel, no_Q)
         super().__init__(_config, _value)
         self.filename = _filename
+        self.transcript = transcript_df
 
     def display(self):
-        print('Transcription')
+        return pd.DataFrame(self.value, columns=['filename', 'channel', 'both', 'start', 'end', 'text'])
+
+

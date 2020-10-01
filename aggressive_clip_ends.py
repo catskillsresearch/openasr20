@@ -4,23 +4,15 @@ from operator import itemgetter
 import noisereduce as nr
 from normalize import normalize
 from clip_ends import clip_ends
+from longest_silence import longest_silence
 
-def aggressive_clip_ends(audio, sample_rate, _cutoff = None):
-    window = 2048
-    if audio.shape[0] < window-100:
+def aggressive_clip_ends(audio, sample_rate):
+    noisy_segment, cutoff = longest_silence(audio)
+    if not noisy_segment:
         return normalize(audio), (0, len(audio))
-    N=10
-    cutoff=_cutoff if _cutoff else np.max(audio[0:20])
-    silence_mask=np.abs(audio) < cutoff
-    groups = [[i for i, _ in group] for key, group in groupby(enumerate(silence_mask), key=itemgetter(1)) if key]
-    boundaries=[(x[0],x[-1]) for x in groups]
-    silences=[(x/sample_rate,(y-N)/sample_rate) for x,y in boundaries if y-x > window]
-    if not len(silences):
-        return normalize(audio), (0, len(audio))
-    longest_noise=sorted([(y-x,(x,y)) for x,y in silences])[-1][1]
-    noisy_segment=tuple(int(x*sample_rate) for x in longest_noise)
-    noisy_part = audio[noisy_segment[0]:min(noisy_segment[0]+window, noisy_segment[1])]
+    noisy_part = audio[noisy_segment[0]:noisy_segment[1]]
     reduced_noise = nr.reduce_noise(audio_clip=audio, noise_clip=noisy_part, verbose=False)
     normed_reduced_noise=normalize(reduced_noise)
-    cutoff=np.max(normed_reduced_noise[0:20])
+    window=100
+    audio_moving=np.convolve(np.abs(normed_reduced_noise), np.ones((window,))/window, mode='same') 
     return clip_ends(normed_reduced_noise, clip=cutoff)
