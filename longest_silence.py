@@ -2,7 +2,7 @@ import numpy as np
 from itertools import groupby
 from operator import itemgetter
 
-def longest_silence(sound, window = 100, threshold = 0.85, min_gap = 10, clip=0.0005):
+def longest_silence(sound, window = 100, threshold = 0.3, min_gap = 10, clip=0.0005):
     audio_moving=np.convolve(np.abs(sound), np.ones((window,))/window, mode='same') 
     amplitudes=np.sort(audio_moving)
     n_amp=audio_moving.shape[0]

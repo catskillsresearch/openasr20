@@ -13,6 +13,4 @@ def aggressive_clip_ends(audio, sample_rate):
     noisy_part = audio[noisy_segment[0]:noisy_segment[1]]
     reduced_noise = nr.reduce_noise(audio_clip=audio, noise_clip=noisy_part, verbose=False)
     normed_reduced_noise=normalize(reduced_noise)
-    window=100
-    audio_moving=np.convolve(np.abs(normed_reduced_noise), np.ones((window,))/window, mode='same') 
     return clip_ends(normed_reduced_noise, clip=cutoff)

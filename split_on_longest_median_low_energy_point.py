@@ -8,7 +8,7 @@ from clip_ends import clip_ends
 from longest_silence import longest_silence
 
 def split_on_longest_median_low_energy_point(sound, window = 100, threshold = 0.3, min_gap = 10):
-    LS, clip = longest_silence(sound, window = 100, threshold = 0.3, min_gap = 10, clip=0.0005)
+    LS, clip = longest_silence(sound, window, threshold, min_gap, clip=0.0005)
     if not LS:
         return [(sound, 0, sound.shape[0]), None]
     start,end = LS
