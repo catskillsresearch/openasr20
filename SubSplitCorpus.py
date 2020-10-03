@@ -4,7 +4,7 @@ from split_artifact import split_artifact
 
 class SubSplitCorpus(SplitCorpus):
     
-    def __init__(self, _corpus, min_words=5, threshold=0.5):
+    def __init__(self, _corpus, min_words=2):
         C = _corpus.C
         df = _corpus.sample_statistics()
         median_words_in_sample=int(df[(df.Corpus=="Split Transcription") &
@@ -15,7 +15,7 @@ class SubSplitCorpus(SplitCorpus):
         problems=[]
         for artifact in tqdm.notebook.tqdm(_corpus.artifacts):
             try:
-                R.append(split_artifact(artifact, min(min_words, median_words_in_sample), threshold))
+                R.append(split_artifact(artifact, min(min_words, median_words_in_sample)))
             except:
                 problems.append(artifact)
         split_artifacts = [item for sublist in R for item in sublist]
