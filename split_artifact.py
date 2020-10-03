@@ -1,15 +1,16 @@
 import numpy as np
-from recursive_split import recursive_split
 from AudioTextSample import AudioTextSample
 from aggressive_clip_ends import aggressive_clip_ends
+from optimal_split import optimal_split
 
 def split_artifact(artifact, median_words_in_sample, threshold, window=500):
     config = artifact.target.C
     if artifact.target.n_words <= median_words_in_sample:
-        artifact.root = artifact.key
+        return [artifact]
+    if artifact.source.n_samples < 3*config.sample_rate:  # Under 3 seconds is fine
         return [artifact]
     audio=artifact.source.value
-    A=recursive_split(audio, threshold=threshold, window=window)
+    A=optimal_split(0.0001, 0.6, artifact.target.n_words, artifact.target.value, window=window)
     n_chunks=len(A)
     tokens=artifact.target.tokens
     n_tokens=len(tokens)

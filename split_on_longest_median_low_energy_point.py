@@ -15,6 +15,6 @@ def split_on_longest_median_low_energy_point(sound, window = 100, threshold = 0.
     if end-start < window:
         return [(sound, 0, sound.shape[0]), None]
     midpoint = start + (end-start)//2
-    left, (startL, endL) = clip_ends(sound[0:midpoint], clip)
-    right, (startR, endR) = clip_ends(sound[midpoint:], clip)
-    return [(left, startL, endL), (right, midpoint+startR, midpoint+endR)]
+    left, (startL, endL) = (sound[0:midpoint], (0, midpoint))
+    right, (startR, endR) = (sound[midpoint:], (midpoint,len(sound)))
+    return [(left, startL, endL), (right, startR, endR)]
