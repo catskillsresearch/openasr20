@@ -21,16 +21,18 @@ def split_artifact(artifact, median_words_in_sample, window=500):
             T = [' '.join(tokens)]
         else:
             token_weights=weights(tokens)*n_chunks
-            next_chunk=1
             cum = 0
             token_to_chunk={i:[] for i in range(n_chunks)}
+            token_to_chunk
+            next_chunk=1
             for token,w in zip(tokens,token_weights):
                 cum += w
                 if cum < next_chunk:
                     token_to_chunk[next_chunk-1].append(token)
                 else:
                     token_to_chunk[next_chunk].append(token)
-                    next_chunk += 1
+                    next_chunk = min(next_chunk+1, n_chunks-1)
+
             T=[' '.join(token_to_chunk[i]) for i in range(n_chunks)]
     S = [AudioTextSample(config, artifact, i, aggressive_clip_ends(audio, config.sample_rate)[0], text)
          for i, (audio, text) in enumerate(zip(A, T))]
