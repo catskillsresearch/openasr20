@@ -162,6 +162,8 @@ class TrainerVanilla():
             train_sampler.shuffle(epoch)
 
             if just_once:
+                save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=False)
+                save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=True)
                 return training_results
 
         if epoch % constant.args.save_every != 0:

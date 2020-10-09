@@ -17,11 +17,7 @@ def save_model(model, epoch, opt, metrics, label2id, id2label, best_model=False)
             constant.args.save_folder, constant.args.name)
     else:
         sample_size=f"_{os.getenv('SAMPLE_SIZE')}"
-        save_path = "{}/{}/epoch_{}_{}{}.th".format(constant.args.save_folder,
-                                                    constant.args.name,
-                                                    epoch,
-                                                    os.getpid(),
-                                                    sample_size)
+        save_path = f"{constant.args.save_folder}/{constant.args.name}/epoch_{epoch}_{sample_size}_{os.getpid()}.th"
 
     if not os.path.exists(constant.args.save_folder + "/" + constant.args.name):
         os.makedirs(constant.args.save_folder + "/" + constant.args.name)
@@ -61,7 +57,6 @@ def save_model(model, epoch, opt, metrics, label2id, id2label, best_model=False)
     else:
         print("Loss is not defined")
     torch.save(args, save_path)
-
 
 def load_model(load_path):
     """

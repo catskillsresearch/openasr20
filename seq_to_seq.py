@@ -544,5 +544,3 @@ def calculate_bleu(data, src_field, trg_field, model, device, max_len = 50, show
             break
 
     return (pred_trgs, trgs, bleu_score(pred_trgs, trgs))
-
-    
