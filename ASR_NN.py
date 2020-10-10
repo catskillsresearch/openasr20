@@ -6,6 +6,7 @@ from TrainerVanilla import TrainerVanilla
 from utils.data_loader import AudioDataLoader, BucketingSampler
 from SpectrogramDatasetRAM import SpectrogramDatasetRAM
 import logging
+import matplotlib.pyplot as plt
 
 class ASR_NN:
 
@@ -80,3 +81,17 @@ class ASR_NN:
                                   constant.args.loss,
                                   0, 1,
                                   self.label2id, self.id2label, just_once=True)
+
+    def score(self, output):
+        import pandas as pd
+        df=pd.DataFrame([x for x in output if len(x[1]) > 0], columns=['hyp', 'gold', 'cer', 'wer'])
+        df['gold_chars']=df.gold.apply(len)
+        df['gold_words']=df.gold.apply(lambda x: len(x.split(' ')))
+        df['cer_pct']=df.cer/(df.gold_chars+0.0000001)
+        df['wer_pct']=df.wer/(df.gold_words+0.000001)
+        fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(20,6))
+        df.cer_pct.plot(kind='hist',bins=100, edgecolor='black', linewidth=1.2, ax=axes[0])
+        axes[0].set_title(r'CER %')
+        df.wer_pct.plot(kind='hist',bins=100, edgecolor='black', linewidth=1.2, ax=axes[1])
+        axes[1].set_title(r'WER %')
+        return df
