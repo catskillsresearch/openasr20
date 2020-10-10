@@ -1,10 +1,10 @@
+from tqdm.notebook import tqdm
 from torch.utils.data import Dataset
 import numpy as np
-import os
-import subprocess
-import torchaudio
-from tempfile import NamedTemporaryFile
+import librosa, torch
 from load_randomly_augmented_audio_RAM import load_randomly_augmented_audio_RAM
+from utils.data_loader import windows
+from utils import constant
 
 class SpectrogramDatasetRAM(Dataset):
 
@@ -14,7 +14,7 @@ class SpectrogramDatasetRAM(Dataset):
         Parses audio into spectrogram with optional normalization and various augmentations
         ...
         :param audio_conf: Dictionary containing the sample rate, window and the window length/stride in seconds
-        :param corpus: Path to manifest csv as describe above
+        :param corpus: List of (audio,transcription) pairs
         :param labels: String containing all the possible characters to map to
         :param normalize: Apply standard mean and deviation normalization to audio tensor
         :param augment(default False):  Apply random tempo and gain perturbations
@@ -30,7 +30,7 @@ class SpectrogramDatasetRAM(Dataset):
             'noise_dir') is not None else None
         self.noise_prob = audio_conf.get('noise_prob')
         self.label2id = label2id
-        self.corpus = [(self.parse_audio(audio)[:,:constant.args.src_max_len], self.parse_transcript(text)) for audio, text in corpus]
+        self.corpus = [(self.parse_audio(audio)[:,:constant.args.src_max_len], self.parse_transcript(text)) for audio, text in tqdm(corpus)]
         self.max_size = len(self.corpus)
 
     def __getitem__(self, index):
@@ -38,7 +38,7 @@ class SpectrogramDatasetRAM(Dataset):
 
     def parse_audio(self, audio):
         if self.augment:
-            y = load_randomly_augmented_audio_RAM(audio_path, self.sample_rate)
+            y = load_randomly_augmented_audio_RAM(audio, self.sample_rate)
         else:
             y = audio
 

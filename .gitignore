@@ -12,3 +12,5 @@ save
 Untitled.ipynb
 ship
 RESUL*.txt
+*.pkl
+*.tsv

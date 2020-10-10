@@ -46,7 +46,7 @@ class ASR_NN:
         constant.args.k_lr = 1
         constant.args.sample_rate=self.config.sample_rate
         constant.args.continue_from=self.config.best_model
-        constant.args.augment=True
+        constant.args.augment=False
         self.audio_conf = dict(sample_rate=constant.args.sample_rate,
                                window_size=constant.args.window_size,
                                window_stride=constant.args.window_stride,
@@ -70,7 +70,7 @@ class ASR_NN:
         corpus = [(artifact.source.value, artifact.target.value) for artifact in subsplits.artifacts]
         train_data = SpectrogramDatasetRAM (self.audio_conf, corpus, self.label2id, normalize=True, augment=constant.args.augment)
         self.train_sampler = BucketingSampler(train_data, batch_size=constant.args.batch_size)
-        self.train_loader = AudioDataLoader(train_data, num_workers=constant.args.num_workers, batch_sampler=train_sampler)
+        self.train_loader = AudioDataLoader(train_data, num_workers=constant.args.num_workers, batch_sampler=self.train_sampler)
         
     def train(self):
         return self.trainer.train(self.model,
