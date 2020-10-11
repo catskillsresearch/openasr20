@@ -8,9 +8,11 @@ from load_and_resample_if_necessary import load_and_resample_if_necessary
 class RecordingTranscriptionSample(Sample):
 
     def __init__(self, _config, _afn, _tfn):
-        _key = os.path.basename(_afn)[0:-4]
+        _key = (os.path.basename(_afn)[0:-4],)
         _audio = load_and_resample_if_necessary(_config, _afn)
-        super().__init__(None, _key, RecordingArtifact(_config, _audio, _afn), TranscriptArtifact(_config, _tfn))
+        super().__init__((_config.language,)+_key,
+                         RecordingArtifact(_config, _audio, _afn),
+                         TranscriptArtifact(_config, _tfn))
 
     def display(self):
         print('KEY', self.key)
@@ -27,5 +29,5 @@ class RecordingTranscriptionSample(Sample):
         speech_segments=[(int(a*C.sample_rate), int(b*C.sample_rate), words)
                          for (a,b,words) in speech
                          if 'IGNORE' not in words]
-        return [AudioTextSample(C, self, (lower,upper), x_np[lower:upper], words)
+        return [AudioTextSample(C, self.key+((lower,upper),), x_np[lower:upper], words)
                 for i, (lower, upper, words) in enumerate(speech_segments)]

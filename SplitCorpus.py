@@ -4,7 +4,6 @@ import pandas as pd
 from glob import glob
 from tqdm import tqdm
 from ArtifactsVector import ArtifactsVector
-from AudioTextSample import AudioTextSample
 from Corpus import Corpus
 from plot_log_population import plot_log_population
 from plot_log_population2 import plot_log_population2

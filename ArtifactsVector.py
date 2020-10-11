@@ -6,9 +6,9 @@ class ArtifactsVector:
     def __init__(self, _config,  _artifacts):
         self.config = _config
         # Source recording stats
-        split_from_roots={x.root:0 for x in _artifacts}
+        split_from_roots={x.key[0:-1]:0 for x in _artifacts}
         for artifact in _artifacts:
-            split_from_roots[artifact.root] += 1
+            split_from_roots[artifact.key[0:-1]] += 1
         self.N_splits_per_root=[y for x,y in split_from_roots.items()]
         # Audio Source
         self.split_length_in_samples=np.array([artifact.source.n_samples for artifact in _artifacts])

@@ -69,7 +69,7 @@ class ASR_NN:
     def load_training_set(self, subsplits, batch_size = 1):
         constant.args.batch_size=batch_size
         corpus = [(artifact.source.value, artifact.target.value) for artifact in subsplits.artifacts]
-        train_data = SpectrogramDatasetRAM (self.audio_conf, corpus, self.label2id, normalize=True, augment=constant.args.augment)
+        train_data = SpectrogramDatasetRAM (self.audio_conf, corpus, self.label2id, normalize=False, augment=False)
         self.train_sampler = BucketingSampler(train_data, batch_size=constant.args.batch_size)
         self.train_loader = AudioDataLoader(train_data, num_workers=constant.args.num_workers, batch_sampler=self.train_sampler)
         
@@ -81,6 +81,13 @@ class ASR_NN:
                                   constant.args.loss,
                                   0, 1,
                                   self.label2id, self.id2label, just_once=True)
+
+    def infer(self):
+        return self.trainer.infer(self.model,
+                                  self.train_loader,
+                                  self.train_sampler,
+                                  self.label2id, self.id2label)
+
 
     def score(self, output):
         import pandas as pd

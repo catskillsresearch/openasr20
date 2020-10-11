@@ -1,12 +1,11 @@
 import os
-from tqdm import tqdm
+from tqdm.notebook import tqdm
 import logging, torch, time, sys
 from utils import constant
 from torch.autograd import Variable
 from utils.functions import save_model
 from torch.utils.tensorboard import SummaryWriter
 from utils.metrics import calculate_metrics, calculate_cer, calculate_wer, calculate_cer_en_zh
-
 from torch.cuda.amp import GradScaler, autocast # Tensor Cores
 
 class TrainerVanilla():
@@ -167,3 +166,56 @@ class TrainerVanilla():
         if epoch % constant.args.save_every != 0:
             save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=False)
             save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=True)
+
+    def infer (self, model, train_loader, train_sampler,  label2id, id2label):
+        """
+        Training
+        args:
+            model: Model object
+            train_loader: DataLoader object of the training set
+        """
+        print("WELCOME TO TRANS WORLD AIRWAYS")
+        infer_results = []
+        logging.info("EVAL")
+        model.eval()
+        pbar = tqdm(iter(train_loader), leave=True, total=len(train_loader))
+        for i, (data) in enumerate(pbar):
+            src, tgt, src_percentages, src_lengths, tgt_lengths = data
+
+            if constant.USE_CUDA:
+                src = src.cuda()
+                tgt = tgt.cuda()
+
+            with torch.no_grad():
+                pred, gold, hyp_seq, gold_seq = model(src, src_lengths, tgt, verbose=False)
+
+            try: # handle case for CTC
+                strs_gold, strs_hyps = [], []
+                for ut_gold in gold_seq:
+                    str_gold = ""
+                    for x in ut_gold:
+                        if int(x) == constant.PAD_TOKEN:
+                            break
+                        str_gold = str_gold + id2label[int(x)]
+                    strs_gold.append(str_gold)
+                for ut_hyp in hyp_seq:
+                    str_hyp = ""
+                    for x in ut_hyp:
+                        if int(x) == constant.PAD_TOKEN:
+                            break
+                        str_hyp = str_hyp + id2label[int(x)]
+                    str_hyp = ' '.join([x.strip() for x in str_hyp.split(' ')])
+                    strs_hyps.append(str_hyp)
+            except Exception as e:
+                print(e)
+                logging.info("NaN predictions")
+                continue
+
+            for j in range(len(strs_hyps)):
+                strs_hyps[j] = strs_hyps[j].replace(constant.SOS_CHAR, '').replace(constant.EOS_CHAR, '')
+                strs_gold[j] = strs_gold[j].replace(constant.SOS_CHAR, '').replace(constant.EOS_CHAR, '')
+                cer = calculate_cer(strs_hyps[j].replace(' ', ''), strs_gold[j].replace(' ', ''))
+                wer = calculate_wer(strs_hyps[j], strs_gold[j])
+                infer_results.append((strs_hyps[j], strs_gold[j], cer, wer))
+
+        return infer_results

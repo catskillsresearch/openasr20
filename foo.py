@@ -17,7 +17,8 @@ class TrainerVanilla():
         logging.info("Trainer is initialized")
         self.writer = SummaryWriter()
 
-    def train(self, model, train_loader, train_sampler, opt, loss_type, start_epoch, num_epochs, label2id, id2label, last_metrics=None):
+    def train(self, model, train_loader, train_sampler, opt, loss_type,
+              start_epoch, num_epochs, label2id, id2label, just_once = False):
         """
         Training
         args:
@@ -26,8 +27,8 @@ class TrainerVanilla():
             opt: Optimizer object
             start_epoch: start epoch (> 0 if you resume the process)
             num_epochs: last epoch
-            last_metrics: (if resume)
         """
+        print("WELCOME TO PAN AMERICAN AIRWAYS")
         history = []
         start_time = time.time()
         smoothing = constant.args.label_smoothing
@@ -49,10 +50,9 @@ class TrainerVanilla():
             total_loss, total_cer, total_wer, total_char, total_word = 0, 0, 0, 0, 0
 
             start_iter = 0
-
+            if just_once:
+                training_results = []
             logging.info("TRAIN")
-
-
             model.train()
             pbar = tqdm(iter(train_loader), leave=True, total=len(train_loader))
             for i, (data) in enumerate(pbar, start=start_iter):
@@ -109,20 +109,23 @@ class TrainerVanilla():
                     cer = calculate_cer(strs_hyps[j].replace(' ', ''), strs_gold[j].replace(' ', ''))
                     wer = calculate_wer(strs_hyps[j], strs_gold[j])
                     # print(f"GOLD: |{strs_gold[j]}|; HYP: |{strs_hyps[j]}|")
+                    if just_once:
+                        training_results.append((strs_hyps[j], strs_gold[j], cer, wer))
                     total_cer += cer
                     total_wer += wer
                     total_char += len(strs_gold[j].replace(' ', ''))
                     total_word += len(strs_gold[j].split(" "))
 
+                # loss.backward()
                 scaler.scale(loss).backward()	# Tensor Cores
 
                 if constant.args.clip:
                     scaler.unscale_(opt)	# Tensor Cores
                     torch.nn.utils.clip_grad_norm_(model.parameters(), constant.args.max_norm)
-                scaler.step(opt)
-
                 
-                opt.step()
+                # opt.step()
+                scaler.step(opt)		# Tensor Cores
+                scaler.update()			# Tensor Cores
 
                 total_loss += loss.item()
                 non_pad_mask = gold.ne(constant.PAD_TOKEN)
@@ -157,6 +160,9 @@ class TrainerVanilla():
                            label2id, id2label, best_model=True)
             
             train_sampler.shuffle(epoch)
+
+            if just_once:
+                return training_results
 
         if epoch % constant.args.save_every != 0:
             save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=False)
