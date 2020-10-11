@@ -30,7 +30,8 @@ class SpectrogramDatasetRAM(Dataset):
             'noise_dir') is not None else None
         self.noise_prob = audio_conf.get('noise_prob')
         self.label2id = label2id
-        self.corpus = [(self.parse_audio(audio)[:,:constant.args.src_max_len], self.parse_transcript(text)) for audio, text in tqdm(corpus)]
+        self.corpus = [(self.parse_audio(audio)[:,:constant.args.src_max_len], self.parse_transcript(text, i))
+                       for i, (audio, text) in enumerate(tqdm(corpus))]
         self.max_size = len(self.corpus)
 
     def __getitem__(self, index):
@@ -69,9 +70,9 @@ class SpectrogramDatasetRAM(Dataset):
 
         return spect
 
-    def parse_transcript(self, _transcript):
+    def parse_transcript(self, _transcript, i):
         transcript = constant.SOS_CHAR + _transcript.replace('\n', '').lower() + constant.EOS_CHAR
-        transcript = list(filter(None, [self.label2id.get(x) for x in list(transcript)]))
+        transcript = [i]+list(filter(None, [self.label2id.get(x) for x in list(transcript)]))
         return transcript
 
     def __len__(self):

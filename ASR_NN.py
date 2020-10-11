@@ -3,10 +3,30 @@ sys.path.append('/home/catskills/Desktop/openasr20/end2end_asr_pytorch')
 from utils import constant
 from utils.functions import load_model
 from TrainerVanilla import TrainerVanilla
-from utils.data_loader import AudioDataLoader, BucketingSampler
+from utils.data_loader import AudioDataLoader
 from SpectrogramDatasetRAM import SpectrogramDatasetRAM
 import logging
 import matplotlib.pyplot as plt
+from torch.utils.data.sampler import Sampler
+
+class FucketingSampler(Sampler):
+    def __init__(self, data_source, batch_size=1):
+        """
+        Samples batches assuming they are in order of size to batch similarly sized samples together.
+        """
+        super(FucketingSampler, self).__init__(data_source)
+        self.data_source = data_source
+        ids = list(range(0, len(data_source)))
+        self.bins = [ids[i:i + batch_size]
+                     for i in range(0, len(ids), batch_size)]
+
+    def __iter__(self):
+        for ids in self.bins:
+            yield ids
+
+    def __len__(self):
+        return len(self.bins)
+
 
 class ASR_NN:
 
@@ -70,7 +90,7 @@ class ASR_NN:
         constant.args.batch_size=batch_size
         corpus = [(artifact.source.value, artifact.target.value) for artifact in subsplits.artifacts]
         train_data = SpectrogramDatasetRAM (self.audio_conf, corpus, self.label2id, normalize=False, augment=False)
-        self.train_sampler = BucketingSampler(train_data, batch_size=constant.args.batch_size)
+        self.train_sampler = FucketingSampler(train_data, batch_size=constant.args.batch_size)
         self.train_loader = AudioDataLoader(train_data, num_workers=constant.args.num_workers, batch_sampler=self.train_sampler)
         
     def train(self):
@@ -91,7 +111,7 @@ class ASR_NN:
 
     def score(self, output):
         import pandas as pd
-        df=pd.DataFrame([x for x in output if len(x[1]) > 0], columns=['hyp', 'gold', 'cer', 'wer'])
+        df=pd.DataFrame([x for x in output if len(x[1]) > 0], columns=['order', 'hyp', 'gold', 'cer', 'wer'])
         df['gold_chars']=df.gold.apply(len)
         df['gold_words']=df.gold.apply(lambda x: len(x.split(' ')))
         df['cer_pct']=df.cer/(df.gold_chars+0.0000001)

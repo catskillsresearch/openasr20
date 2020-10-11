@@ -56,7 +56,7 @@ class TrainerVanilla():
             pbar = tqdm(iter(train_loader), leave=True, total=len(train_loader))
             for i, (data) in enumerate(pbar, start=start_iter):
                 src, tgt, src_percentages, src_lengths, tgt_lengths = data
-
+            
                 if constant.USE_CUDA:
                     src = src.cuda()
                     tgt = tgt.cuda()
@@ -182,6 +182,9 @@ class TrainerVanilla():
         for i, (data) in enumerate(pbar):
             src, tgt, src_percentages, src_lengths, tgt_lengths = data
 
+            order = tgt[:,0].numpy()
+            tgt = tgt[:,1:]
+            
             if constant.USE_CUDA:
                 src = src.cuda()
                 tgt = tgt.cuda()
@@ -216,6 +219,6 @@ class TrainerVanilla():
                 strs_gold[j] = strs_gold[j].replace(constant.SOS_CHAR, '').replace(constant.EOS_CHAR, '')
                 cer = calculate_cer(strs_hyps[j].replace(' ', ''), strs_gold[j].replace(' ', ''))
                 wer = calculate_wer(strs_hyps[j], strs_gold[j])
-                infer_results.append((strs_hyps[j], strs_gold[j], cer, wer))
+                infer_results.append((order[j], strs_hyps[j], strs_gold[j], cer, wer))
 
-        return infer_results
+        return list(sorted(infer_results))
