@@ -3,7 +3,6 @@ import numpy as np
 import os
 import subprocess
 import torchaudio
-from tempfile import NamedTemporaryFile
 from augment_audio_with_sox_RAM import augment_audio_with_sox_RAM
 
 def load_randomly_augmented_audio_RAM(audio, sample_rate=16000, tempo_range=(0.85, 1.15), gain_range=(-6, 8)):
