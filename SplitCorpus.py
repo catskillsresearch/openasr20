@@ -2,7 +2,7 @@ import librosa, os
 import numpy as np
 import pandas as pd
 from glob import glob
-from tqdm import tqdm
+from tqdm.auto import tqdm
 from ArtifactsVector import ArtifactsVector
 from Corpus import Corpus
 from plot_log_population import plot_log_population
@@ -26,7 +26,7 @@ class SplitCorpus (Corpus):
     @classmethod
     def split_on_silence(cls, _config, _recordings):
         _artifacts = []
-        for artifact in _recordings.artifacts:
+        for artifact in tqdm(_recordings.artifacts):
             _artifacts.extend(artifact.split_on_silence())
         return cls(_config, _artifacts)
 

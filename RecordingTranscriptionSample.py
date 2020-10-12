@@ -5,6 +5,7 @@ from TranscriptArtifact import TranscriptArtifact
 from AudioTextSample import AudioTextSample
 from load_and_resample_if_necessary import load_and_resample_if_necessary
 from optimal_split import optimal_split
+from split_on_silence import split_on_silence as sos
 
 class RecordingTranscriptionSample(Sample):
 
@@ -33,5 +34,10 @@ class RecordingTranscriptionSample(Sample):
         return [AudioTextSample(C, self.key+((lower,upper),), x_np[lower:upper], words)
                 for i, (lower, upper, words) in enumerate(speech_segments)]
 
-    def split_on_silence(self, window=500):
-        pass
+    def split_on_silence(self, t_lower=0.0001, t_upper=0.8, window = 500, min_gap = 10, goal_length_in_seconds = 3):
+        C = self.source.C
+        sample_rate = C.sample_rate
+        audio = self.source.value
+        A=sos(audio, t_lower, t_upper, window, min_gap, sample_rate, goal_length_in_seconds)
+        return [AudioTextSample(C, self.key+(region,), audio, '  ')
+                for (audio, region) in A]
