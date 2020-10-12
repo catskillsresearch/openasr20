@@ -120,8 +120,8 @@ class TTC_NN:
 
     def infer(self):
         self.model.eval();
-        train_iterator = Iterator(train_data, batch_size=batch_size)
         R=[]
+        train_iterator = Iterator(self.train_data, batch_size=self.batch_size)
         for i, batch in enumerate(tqdm(train_iterator)):
             src = batch.src.to(self.device)
             trg = batch.trg.to(self.device)
@@ -130,17 +130,16 @@ class TTC_NN:
             output_dim = output.shape[-1]
             output = output.contiguous().view(-1, output_dim)
             trg = trg[:,1:].contiguous().view(-1)   
-            prediction=prediction_to_string(TRG, batch_size, output, False)
-            gold=prediction_to_string(TRG, batch_size, trg, True)
+            prediction=prediction_to_string(self.TRG, self.batch_size, output, False)
+            gold=prediction_to_string(self.TRG, self.batch_size, trg, True)
             for hyp,au in zip(prediction, gold):
+                if '<pad>' in au:
+                    continue
                 R.append((au,hyp,calculate_cer(hyp, au),calculate_wer(hyp, au)))
-        R=[]
-        for hyp,au in zip(prediction, gold):
-            R.append((au,hyp,calculate_cer(hyp, au),calculate_wer(hyp, au)))
         self.predictions = R
         return R
 
-    def score(self):
+    def score(self, R):
         results=pd.DataFrame(R, columns=['Gold', 'Pred', 'CER', 'WER'])
         results['GOLD_n_words']=results['Gold'].apply(lambda x: len(x.split(' ')))
         results['GOLD_n_chars']=results['Gold'].apply(lambda x: len(x))
@@ -148,6 +147,7 @@ class TTC_NN:
         results['WER_pct']=results.CER/results['GOLD_n_words']
         results=results[results.Gold != '<pad>']
         results.WER_pct.hist(bins=1000)
-        plt.xlim(0,1)
-        results.WER_pct.mean()
-        results.CER_pct.mean()
+#        plt.xlim(0,1)
+        print("CER mean", results.CER_pct.mean())
+        print("WER mean", results.WER_pct.mean())
+        return results

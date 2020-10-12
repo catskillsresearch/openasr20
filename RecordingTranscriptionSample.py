@@ -4,6 +4,7 @@ from RecordingArtifact import RecordingArtifact
 from TranscriptArtifact import TranscriptArtifact
 from AudioTextSample import AudioTextSample
 from load_and_resample_if_necessary import load_and_resample_if_necessary
+from optimal_split import optimal_split
 
 class RecordingTranscriptionSample(Sample):
 
@@ -22,7 +23,7 @@ class RecordingTranscriptionSample(Sample):
         self.target.display()
         print()
 
-    def split(self):
+    def transcript_split(self):
         x_np = self.source.value
         C = self.source.C
         speech=[(float(x[-3]), float(x[-2]), x[-1]) for x in self.target.value if len(x)==6]
@@ -31,3 +32,6 @@ class RecordingTranscriptionSample(Sample):
                          if 'IGNORE' not in words]
         return [AudioTextSample(C, self.key+((lower,upper),), x_np[lower:upper], words)
                 for i, (lower, upper, words) in enumerate(speech_segments)]
+
+    def split_on_silence(self, window=500):
+        pass

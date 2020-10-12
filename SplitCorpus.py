@@ -17,12 +17,19 @@ class SplitCorpus (Corpus):
         self.population = ArtifactsVector(_config, _artifacts)
 
     @classmethod
-    def from_recordings(cls, _config, _recordings):
+    def transcript_split(cls, _config, _recordings):
         _artifacts = []
         for artifact in _recordings.artifacts:
-            _artifacts.extend(artifact.split())
+            _artifacts.extend(artifact.transcript_split())
         return cls(_config, _artifacts)
     
+    @classmethod
+    def split_on_silence(cls, _config, _recordings):
+        _artifacts = []
+        for artifact in _recordings.artifacts:
+            _artifacts.extend(artifact.split_on_silence())
+        return cls(_config, _artifacts)
+
     def visualization(self):
         plot_log_population(self.population.N_splits_per_root,         'Splits per 10-minute recording',       '# splits per recording', '# recordings with this many splits', 100)
         plot_log_population(self.population.word_lengths_in_graphemes, 'Word lengths',                         'Graphemes/word', 'Words with this many graphemes', 12)

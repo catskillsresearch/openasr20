@@ -10,7 +10,7 @@ def clip_ends(audio, clip=.0005):
         start_x=np.where(audio2 > clip)[0][0]
         x += start_x
     except:
-        pass
+        return (np.array([], dtype=audio.dtype), (x, x))
 
     audio3=audio2[::-1]
     try:
