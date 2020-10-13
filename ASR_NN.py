@@ -1,13 +1,14 @@
-import sys
+import sys, json
 sys.path.append('/home/catskills/Desktop/openasr20/end2end_asr_pytorch')
 from utils import constant
-from utils.functions import load_model
+from utils.functions import save_model, load_model, init_transformer_model, init_optimizer
 from TrainerVanilla import TrainerVanilla
 from utils.data_loader import AudioDataLoader
 from SpectrogramDatasetRAM import SpectrogramDatasetRAM
 import logging
 import matplotlib.pyplot as plt
 from torch.utils.data.sampler import Sampler
+from initialize_weights import initialize_weights
 
 class FucketingSampler(Sampler):
     def __init__(self, data_source, batch_size=1):
@@ -20,6 +21,9 @@ class FucketingSampler(Sampler):
         self.bins = [ids[i:i + batch_size]
                      for i in range(0, len(ids), batch_size)]
 
+    def shuffle(self, epoch):
+       pass
+   
     def __iter__(self):
         for ids in self.bins:
             yield ids
@@ -76,12 +80,31 @@ class ASR_NN:
                                noise_prob=constant.args.noise_prob,
                                noise_levels=(constant.args.noise_min, constant.args.noise_max))
 
+    def new_model(self):
+        with open(constant.args.labels_path) as label_file:
+            labels = str(''.join(json.load(label_file)))
+        # add PAD_CHAR, SOS_CHAR, EOS_CHAR
+        labels = constant.PAD_CHAR + constant.SOS_CHAR + constant.EOS_CHAR + labels
+        self.label2id, self.id2label = {}, {}
+        count = 0
+        for i in range(len(labels)):
+            if labels[i] not in self.label2id:
+                self.label2id[labels[i]] = count
+                self.id2label[count] = labels[i]
+                count += 1
+            else:
+                print("multiple label: ", labels[i])
+        self.model = init_transformer_model(constant.args, self.label2id, self.id2label)
+        self.opt = init_optimizer(constant.args, self.model, "noam")
+        self.model.cuda(0)
+
     def load_model(self):
         self.config.extension='_gradscaler'
         self.config.model_name=f'{self.config.language}_{self.config.sample_rate}_end2end_asr_pytorch_drop0.1_cnn_batch12_4_vgg_layer4{self.config.extension}'
         self.config.model_dir=f'save/{self.config.model_name}'
         self.config.best_model=f'{self.config.model_dir}/best_model.th'
         constant.args.continue_from=self.config.best_model
+        logging.info(f'load {constant.args.continue_from}')
         self.model, self.opt, self.epoch, self.metrics, self.loaded_args, self.label2id, self.id2label = load_model(constant.args.continue_from)
         self.model = self.model.cuda(0)
         logging.info(self.model)
@@ -94,13 +117,17 @@ class ASR_NN:
         self.train_loader = AudioDataLoader(train_data, num_workers=constant.args.num_workers, batch_sampler=self.train_sampler)
         
     def train(self):
-        return self.trainer.train(self.model,
+        (self.results, self.metrics) = self.trainer.train(self.model,
                                   self.train_loader,
                                   self.train_sampler,
                                   self.opt,
                                   constant.args.loss,
                                   0, 1,
                                   self.label2id, self.id2label, just_once=True)
+        return self.results
+
+    def save(self, filename):
+        save_model(self.model, 0, self.opt, self.metrics, self.label2id, self.id2label, save_path = filename)
 
     def infer(self):
         return self.trainer.infer(self.model,

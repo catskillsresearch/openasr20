@@ -8,19 +8,21 @@ from utils.optimizer import NoamOpt, AnnealingOpt
 from utils import constant
 
 
-def save_model(model, epoch, opt, metrics, label2id, id2label, best_model=False):
+def save_model(model, epoch, opt, metrics, label2id, id2label, best_model=False, save_path = None):
     """
     Saving model, TODO adding history
     """
-    if best_model:
-        save_path = "{}/{}/best_model.th".format(
-            constant.args.save_folder, constant.args.name)
-    else:
-        sample_size=f"_{os.getenv('SAMPLE_SIZE')}"
-        save_path = f"{constant.args.save_folder}/{constant.args.name}/epoch_{epoch}_{sample_size}_{os.getpid()}.th"
+    if not save_path:
+        
+        if best_model:
+            save_path = "{}/{}/best_model.th".format(
+                constant.args.save_folder, constant.args.name)
+        else:
+            sample_size=f"_{os.getenv('SAMPLE_SIZE')}"
+            save_path = f"{constant.args.save_folder}/{constant.args.name}/epoch_{epoch}_{sample_size}_{os.getpid()}.th"
 
-    if not os.path.exists(constant.args.save_folder + "/" + constant.args.name):
-        os.makedirs(constant.args.save_folder + "/" + constant.args.name)
+        if not os.path.exists(constant.args.save_folder + "/" + constant.args.name):
+            os.makedirs(constant.args.save_folder + "/" + constant.args.name)
 
     print("SAVE MODEL to", save_path)
     if constant.args.loss == "ce":

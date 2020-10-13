@@ -107,7 +107,7 @@ class TrainerVanilla():
                     strs_gold[j] = strs_gold[j].replace(constant.SOS_CHAR, '').replace(constant.EOS_CHAR, '')
                     cer = calculate_cer(strs_hyps[j].replace(' ', ''), strs_gold[j].replace(' ', ''))
                     wer = calculate_wer(strs_hyps[j], strs_gold[j])
-                    # print(f"GOLD: |{strs_gold[j]}|; HYP: |{strs_hyps[j]}|")
+                    print(f"gold |{strs_gold[j]}| pred |{strs_hyps[j]}|")
                     if just_once:
                         training_results.append((strs_hyps[j], strs_gold[j], cer, wer))
                     total_cer += cer
@@ -151,6 +151,9 @@ class TrainerVanilla():
             metrics["history"] = history
             history.append(metrics)
 
+            if just_once:
+                return training_results, metrics
+
             if epoch % constant.args.save_every == 0:
                 save_model(model, (epoch+1), opt, metrics,
                         label2id, id2label, best_model=False)
@@ -159,9 +162,6 @@ class TrainerVanilla():
                            label2id, id2label, best_model=True)
             
             train_sampler.shuffle(epoch)
-
-            if just_once:
-                return training_results
 
         if epoch % constant.args.save_every != 0:
             save_model(model, (epoch+1), opt, metrics, label2id, id2label, best_model=False)
