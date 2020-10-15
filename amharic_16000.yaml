@@ -28,9 +28,9 @@ model:
     manifest_filepath: ???
     sample_rate: 16000
     labels: *labels
-    batch_size: 16
+    batch_size: 24
     trim_silence: True
-    max_duration: 33
+    max_duration: 16.5
     shuffle: True
     is_tarred: False
     tarred_audio_filepaths: null
@@ -39,7 +39,7 @@ model:
     manifest_filepath: ???
     sample_rate: 16000
     labels: *labels
-    batch_size: 16
+    batch_size: 24
     shuffle: False
 
   preprocessor:
@@ -158,7 +158,7 @@ model:
   optim:
     name: novograd
     # cls: nemo.core.optim.optimizers.Novograd
-    lr: .01
+    lr: .001
     # optimizer arguments
     betas: [0.8, 0.5]
     weight_decay: 0.001
