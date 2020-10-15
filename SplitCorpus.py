@@ -24,10 +24,10 @@ class SplitCorpus (Corpus):
         return cls(_config, _artifacts)
     
     @classmethod
-    def split_on_silence(cls, _config, _recordings):
+    def split_on_silence(cls, _config, _recordings, _goal_length_in_seconds = 3):
         _artifacts = []
         for artifact in tqdm(_recordings.artifacts):
-            _artifacts.extend(artifact.split_on_silence())
+            _artifacts.extend(artifact.split_on_silence(goal_length_in_seconds=_goal_length_in_seconds))
         return cls(_config, _artifacts)
 
     def visualization(self):
