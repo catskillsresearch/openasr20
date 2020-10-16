@@ -22,3 +22,4 @@ cmu
 NeMo
 pytorch-lightning
 lightning_logs
+pyannote-audio

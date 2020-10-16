@@ -7,7 +7,7 @@ def reshuffle_samples(C):
     samples=T+V
     random.shuffle(samples)
     n_samples=len(samples)
-    n_train = int(0.8*n_samples)
+    n_train = int(0.9*n_samples)
     train_samples=samples[0:n_train]
     test_samples=samples[n_train:]
     for (case, S) in [('train', train_samples), ('test', test_samples)]:
