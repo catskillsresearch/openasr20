@@ -1,4 +1,4 @@
 from IPython.display import Audio, display
 
 def play(sound):
-    display(Audio(sound, rate=8000))
+    display(Audio(sound, rate=16000))
