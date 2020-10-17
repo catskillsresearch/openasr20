@@ -14,6 +14,7 @@ class Cfg:
         os.system(f'mkdir -p {self.build_dir}')
         os.system(f'mkdir -p {self.audio_split_dir}')
         self.shipping_dir=f'ship/{self.language}/{self.release}'
+        self.model_save_dir=f'save/nemo_{self.language}'
 
     def split_files(self):
         files = glob.glob(f'{self.audio_split_dir}/*.wav')

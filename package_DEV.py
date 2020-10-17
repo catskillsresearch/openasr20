@@ -9,6 +9,7 @@ import pandas as pd
 np.seterr(all='raise')
 
 def package_DEV(C, files, translations):
+    translations = [x.replace("\u200c",'') for x in translations]  # Just Pashto but required
     ctms={'_'.join(os.path.basename(fn.split(',')[0]).split('_')[0:7]): [] for fn in files}
     for fn,pred in zip(files,translations):
         pred=pred.strip()
@@ -50,7 +51,7 @@ def package_DEV(C, files, translations):
                line='\t'.join([str(x) for x in row])
                f.write(f"{line}\n")
     os.chdir(shipping_dir)
-    tar_fn=f'../../catskills_openASR20_dev_{C.language}_{C.release}.tgz'
+    tar_fn=f'../../catskills_openASR20_{C.phase}_{C.language}_{C.release}.tgz'
     with tarfile.open(tar_fn, "w:gz") as tar: 
         for fn in glob('*.ctm'): 
             tar.add(fn)
