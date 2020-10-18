@@ -18,5 +18,6 @@ def transcript_to_split_BUILD_wavs(C):
 if __name__=="__main__":
     from Cfg import Cfg
     from pprint import pprint
-    C = Cfg('NIST', 16000, 'pashto', 'build', '001')
-    transcript_to_split_BUILD_wavs(C)
+    for language in ['pashto', 'amharic']:
+        C = Cfg('NIST', 16000, language, 'build', '001')
+        transcript_to_split_BUILD_wavs(C)

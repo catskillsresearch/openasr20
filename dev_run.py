@@ -1,15 +1,14 @@
-# Usage: python dev_run.py 115 1 8 pashto
-
 from Cfg import Cfg
 from glob import glob
 from package_DEV import package_DEV
 from load_pretrained_model import load_pretrained_model
 import sys
-version=sys.argv[1]
-gpu=int(sys.argv[2])
-batch_size=int(sys.argv[3])
-language=sys.argv[4]
-print("version", version, "gpu", gpu, "batch_size", batch_size, "language", language)
+language=sys.argv[1]
+version=sys.argv[2]
+gpu=int(sys.argv[3])
+batch_size=int(sys.argv[4])
+
+print("language", language, "version", version, "gpu", gpu, "batch_size", batch_size)
 C = Cfg('NIST', 16000, language, 'dev', version)
 model = load_pretrained_model(C, gpu)
 if not model:

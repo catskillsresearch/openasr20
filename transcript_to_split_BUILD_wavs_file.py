@@ -32,8 +32,6 @@ def transcript_to_split_BUILD_wavs_file(C, transcript_file):
         audio_split_file=f"{audio_file[0:-4].replace('/audio/','/silence_split/')}_{lower}_{upper}.wav"
         sf.write(audio_split_file, x_np[lower:upper], C.sample_rate)
 
-    return
-
     # Split audio
     speech=[(float(x[-3]), float(x[-2]), x[-1]) for x in result if len(x)==6]
     speech_segments=[(int(a*C.sample_rate), int(b*C.sample_rate), words)
@@ -45,4 +43,3 @@ def transcript_to_split_BUILD_wavs_file(C, transcript_file):
         sf.write(audio_split_file, x_np[lower:upper], C.sample_rate)
         with open(transcript_split_file,'w') as f:
             f.write(words)
-

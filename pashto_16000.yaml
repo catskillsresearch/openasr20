@@ -10,7 +10,7 @@ model:
     manifest_filepath: ???
     sample_rate: 16000
     labels: *labels
-    batch_size: 12
+    batch_size: 14
     trim_silence: True
     max_duration: 33.0
     shuffle: True
@@ -22,7 +22,7 @@ model:
     manifest_filepath: ???
     sample_rate: 16000
     labels: *labels
-    batch_size: 12
+    batch_size: 14
     shuffle: False
     num_workers: 16
 
