@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pylab as plt
 from IPython.display import Audio
 from Artifact import Artifact
-from aggressive_clip_ends import aggressive_clip_ends
 
 class AudioArtifact (Artifact):
 
@@ -14,10 +13,6 @@ class AudioArtifact (Artifact):
         super().__init__(_config, _value)
         self.calc_stats()
 
-    def aggressively_clip(self):
-        self.value = aggressive_clip_ends(self.value, self.C.sample_rate)[0]
-        self.calc_stats()
-        
     def display(self, transcription = None):
         display(Audio(self.value, rate=self.C.sample_rate))
         plt.figure(figsize=(15,4))

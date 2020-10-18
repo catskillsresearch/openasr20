@@ -24,15 +24,19 @@ class SplitCorpus (Corpus):
         return cls(_config, _artifacts)
     
     @classmethod
-    def split_on_silence(cls, _config, _recordings, _goal_length_in_seconds = 3):
+    def split_on_silence(cls, _config, _recordings, _goal_length_in_seconds = 33):
         _artifacts = []
         for artifact in tqdm(_recordings.artifacts):
-            _artifacts.extend(artifact.split_on_silence(goal_length_in_seconds=_goal_length_in_seconds))
+            try:
+                _artifacts.extend(artifact.split_on_silence(goal_length_in_seconds=_goal_length_in_seconds))
+            except:
+                print("BIG PROBLEMO")
+                return artifact
         return cls(_config, _artifacts)
 
     def visualization(self):
-        plot_log_population(self.population.N_splits_per_root,         'Splits per 10-minute recording',       '# splits per recording', '# recordings with this many splits', 100)
-        plot_log_population(self.population.word_lengths_in_graphemes, 'Word lengths',                         'Graphemes/word', 'Words with this many graphemes', 12)
+        plot_log_population(self.population.N_splits_per_root, 'Splits per 10-minute recording', '# splits per recording', '# recordings with this many splits', 100)
+        plot_log_population(self.population.word_lengths_in_graphemes, 'Word lengths', 'Graphemes/word', 'Words with this many graphemes', 12)
         plot_log_population(self.population.samples_per_grapheme,      'Audio samples per grapheme',           'Samples/grapheme', 'Graphemes that are this long in samples', 100)
         plot_log_population(self.population.samples_per_word, 	       'Audio samples per word',               'Samples/word', 'Words that are this long in samples', 100)
         plot_log_population(self.population.split_length_in_words,     'Splits with this many words',          'word length', 'splits', 100)
