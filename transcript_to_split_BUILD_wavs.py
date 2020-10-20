@@ -18,6 +18,11 @@ def transcript_to_split_BUILD_wavs(C):
 if __name__=="__main__":
     from Cfg import Cfg
     from pprint import pprint
-    for language in ['pashto', 'amharic']:
+    from tqdm.auto import tqdm
+    languages = ['amharic', 'pashto']
+    languages = ['cantonese', 'guarani', 'javanese', 'kurmanji-kurdish',
+                 'mongolian', 'somali', 'tamil', 'vietnamese']
+    languages = ['vietnamese']
+    for language in tqdm(languages):
         C = Cfg('NIST', 16000, language, 'build', '001')
         transcript_to_split_BUILD_wavs(C)

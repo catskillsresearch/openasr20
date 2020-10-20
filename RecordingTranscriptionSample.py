@@ -34,11 +34,8 @@ class RecordingTranscriptionSample(Sample):
         return [AudioTextSample(C, self.key+((lower,upper),), x_np[lower:upper], words)
                 for i, (lower, upper, words) in enumerate(speech_segments)]
 
-    def split_on_silence(self, goal_length_in_seconds = 33):
+    def split_on_silence(self, goal_length_in_seconds):
         C = self.source.C
         audio = self.source.value
-        cuts, self.gap, T = power_split(C, audio)
-        boundaries=np.hstack([[0],cuts,[audio.shape[0]]])
-        segments=np.array([(boundaries[i], boundaries[i+1]) for i in range(boundaries.shape[0]-1)])
-        return [AudioTextSample(C, self.key+((start,end)), audio[start:end], '  ')
-                for start,end in segments]
+        clips = power_split(C, audio, goal_length_in_seconds)
+        return [AudioTextSample(C, self.key+((clip.parent_start,clip.parent_end)), clip.clipped, '  ') for clip in clips]

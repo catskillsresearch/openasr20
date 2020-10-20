@@ -2,13 +2,14 @@ import librosa, os
 import numpy as np
 import pandas as pd
 from glob import glob
-from tqdm.auto import tqdm
+import tqdm
 from ArtifactsVector import ArtifactsVector
 from Corpus import Corpus
 from plot_log_population import plot_log_population
 from plot_log_population2 import plot_log_population2
 from sample_statistics import sample_statistics as stats
 from text_of_file import text_of_file
+from sos import sos
 
 class SplitCorpus (Corpus):
     
@@ -24,14 +25,18 @@ class SplitCorpus (Corpus):
         return cls(_config, _artifacts)
     
     @classmethod
-    def split_on_silence(cls, _config, _recordings, _goal_length_in_seconds = 33):
+    def pool_split_on_silence(cls,  _config, _pool,  _recordings, _goal_length_in_seconds):
+        tasks = [(artifact, _goal_length_in_seconds) for artifact in _recordings.artifacts]
+        splits = list(tqdm.tqdm(_pool.imap(sos, tasks), total=len(tasks)))
+        _artifacts = [x for split in splits for x in split]
+        return cls(_config, _artifacts)
+
+    @classmethod
+    def split_on_silence(cls, _config, _recordings, _goal_length_in_seconds):
         _artifacts = []
-        for artifact in tqdm(_recordings.artifacts):
-            try:
-                _artifacts.extend(artifact.split_on_silence(goal_length_in_seconds=_goal_length_in_seconds))
-            except:
-                print("BIG PROBLEMO")
-                return artifact
+        for i, artifact in enumerate(_recordings.artifacts):
+            print(f"[{i}] PROCESSING {artifact.key}")
+            _artifacts.extend(artifact.split_on_silence(goal_length_in_seconds=_goal_length_in_seconds))
         return cls(_config, _artifacts)
 
     def visualization(self):

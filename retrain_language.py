@@ -40,5 +40,7 @@ def retrain_language(C, train_fraction=0.8):
     trainer.fit(model)
 
 if __name__=="__main__":
-    C = Cfg('NIST', 16000, 'pashto', 'build') 
+    import sys
+    language=sys.argv[1]
+    C = Cfg('NIST', 16000, language, 'build') 
     retrain_language(C, 0.95)
