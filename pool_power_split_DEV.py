@@ -11,14 +11,17 @@ warnings.filterwarnings("ignore")
 import soundfile as sf
 
 def pool_power_split_DEV(pool, C, max_duration):
+    os.system(f'rm -rf {C.audio_split_dir}')
+    os.system(f'mkdir {C.audio_split_dir}')
     recordings = RecordingCorpus(C, pool)
     splits=SplitCorpus.pool_split_on_silence(C, pool, recordings, max_duration)
-    os.system(f'rm {C.audio_split_dir}/*.wav')
+    too_short = C.sample_rate * 0.2
     for artifact in tqdm.tqdm(splits.artifacts):
         language, root, start, end = artifact.key
         filename = f'{C.audio_split_dir}/{root}_{start}_{end}.wav'
         audio = artifact.source.value
-        sf.write(filename, audio, C.sample_rate)
+        if audio.shape[0] >= too_short:
+            sf.write(filename, audio, C.sample_rate)
 
 if __name__=="__main__":
     import sys
