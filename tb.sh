@@ -1,2 +1,3 @@
-tensorboard --logdir=runs
+tensorboard --logdir lightning_logs&
+
 
