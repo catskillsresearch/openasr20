@@ -7,4 +7,4 @@ def transcribe(C, model, audio):
     translation=translations[0]
     translation=translation.split(' ')
     translation=' '.join([x.strip() for x in translation if len(x)])
-    return translation
+    return translation.replace("\u200c",'')  # Just Pashto but required

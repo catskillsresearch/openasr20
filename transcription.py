@@ -14,16 +14,19 @@ def transcription(C, model, audio, max_duration):
         max_samples=int(max_duration*C.sample_rate)
         min_samples=int(0.2*C.sample_rate)
         if size > max_samples:
-            for cutoff in np.linspace(-80,-10,140):
+            for cutoff in np.linspace(-80,-8,200):
                 T=audio.shape[0]/C.sample_rate
                 S = librosa.feature.melspectrogram(y=audio, sr=C.sample_rate, n_mels=64, fmax=8000)
                 S_dB = librosa.power_to_db(S, ref=np.max)
                 s_dB_mean=np.mean(S_dB,axis=0)
                 speech_q=(s_dB_mean>cutoff)
                 silences=T*collect_false(speech_q)/len(speech_q)
-                if 0:
-                    print(f'cutoff {cutoff} #silences {len(silences)}')
-                S2=[(x,y) for x,y in silences if max_duration >= y > 0.001]
+                if 1:
+                    print(f'cutoff {cutoff} #silences {len(silences)}: {silences[0:4]}')
+                S2=[(x,y) for x,y in silences if max_duration >= y > 0.05]
+                S2a=[(x,y) for x,y in silences if 6 >= y > 0.05]
+                if len(S2a):
+                    S2=S2a
                 if len(S2):
                     break
                 cutoff += 1
