@@ -12,8 +12,8 @@ warnings.filterwarnings("ignore")
 def splitter_transcriber(language, release, gpu, max_duration, phase):
     tdir= f'transcriptions/{language}/{phase}/{release}'
     os.system(f'mkdir -p {tdir}')
-    print("language", language, "release", release, "gpu", gpu, "max_duration", max_duration)
-    C = Cfg('NIST', 16000, language, 'dev', release)
+    print("language", language, "phase", phase, "release", release, "gpu", gpu, "max_duration", max_duration)
+    C = Cfg('NIST', 16000, language, phase, release)
     model = load_pretrained_model(C, gpu)
     if not model:
         print("ERROR: no model")
@@ -30,7 +30,6 @@ def splitter_transcriber(language, release, gpu, max_duration, phase):
         if os.path.exists(save_fn):
             print("finished", key)
             continue
-        print(key)
         audio = artifact.source.value
         transcript=transcription(C, model, audio, max_duration)
         translations.append((key, transcript))
@@ -45,5 +44,5 @@ if __name__=="__main__":
     release=sys.argv[2]
     gpu=int(sys.argv[3])
     phase=sys.argv[4]
-    max_duration=16.5
+    max_duration=float(sys.argv[5])
     splitter_transcriber(language, release, gpu, max_duration, phase)

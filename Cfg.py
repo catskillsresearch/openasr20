@@ -1,4 +1,5 @@
 import os, glob
+from tqdm.auto import tqdm
 
 class Cfg:
 
@@ -13,9 +14,18 @@ class Cfg:
         self.audio_split_dir=f'{self.build_dir}/audio_split'
         os.system(f'mkdir -p {self.build_dir}')
         os.system(f'mkdir -p {self.audio_split_dir}')
-        self.shipping_dir=f'ship/{self.language}/{self.release}'
+        self.shipping_dir=f'ship/{self.language}/{self.phase}/{self.release}'
         self.model_save_dir=f'save/nemo_{self.language}'
 
+    def transcription_to_stm(self):
+        tdir=f'{self.build_dir}/transcription_stm'
+        os.system(f'mkdir -p {tdir}')
+        tfns=glob.glob(f'{self.build_dir}/transcription/*.txt')
+        for txt_file in tfns:
+            cmd = f'python OpenASR_convert_reference_transcript.py -f {txt_file} -o {tdir}'
+            print("cmd", cmd)
+            os.system(cmd)
+        
     def split_files(self):
         files = glob.glob(f'{self.audio_split_dir}/*.wav')
         D = []
@@ -32,3 +42,4 @@ class Cfg:
                       'start': int(tstart), 'end': int(tend),
                       't_seconds': tdur, 't_begin': tbeg})
         return D
+    

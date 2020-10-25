@@ -24,7 +24,7 @@ def transcription(C, model, audio, max_duration):
                 if 1:
                     print(f'cutoff {cutoff} #silences {len(silences)}: {silences[0:4]}')
                 S2=[(x,y) for x,y in silences if max_duration >= y > 0.05]
-                S2a=[(x,y) for x,y in silences if 6 >= y > 0.05]
+                S2a=list(reversed([(x,y) for x,y in silences if 6 >= y > 0.05]))
                 if len(S2a):
                     S2=S2a
                 if len(S2):
@@ -37,7 +37,8 @@ def transcription(C, model, audio, max_duration):
                         plt.show()
                         plt.figure(figsize=(60,4))
                         plt.plot(audio);
-                    raise ValueError('couldnt split clip')
+                    # We're probably dealing with a block of silence here
+                    S2=[(0,6)]  # Just grab 6 seconds and move on
             S3=int(S2[-1][-1]*C.sample_rate)
         else:
             S3=size
