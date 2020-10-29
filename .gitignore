@@ -23,3 +23,7 @@ NeMo
 pytorch-lightning
 lightning_logs
 pyannote-audio
+.idea
+nemo_experiments
+scoring
+stm
