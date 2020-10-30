@@ -14,10 +14,12 @@ def predicted_segment_transcript(C, model, audio, start, end, s_dB_mean, samples
     clip_power=s_dB_mean[spec_start:spec_end]
     normalized_power=normalize(np.copy(clip_power))
     timeline=np.arange(spec_start,spec_end)*dt_S
-    w=30
-    smoothed_normalized_power=smooth(normalized_power,w)
+    w=min(30, normalized_power.shape[0])
+    smoothed_normalized_power=normalize(smooth(normalized_power,w))
     speech_mask=extremize(smoothed_normalized_power, 0.2)
     speech_segments=mask_boundaries(speech_mask)+spec_start
     spec_to_words=allocate_pred_to_speech_segments(prediction, speech_segments)
+    if len(spec_to_words)==0:
+        return None
     segment_transcript = [(spec1*dt_S, (spec2-spec1)*dt_S, word) for spec1, spec2, word in spec_to_words]
-    return segment_transcript
+    return segment_transcript, timeline, normalized_power, speech_mask, clip_audio

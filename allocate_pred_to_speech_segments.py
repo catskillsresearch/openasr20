@@ -14,8 +14,11 @@ def align_segment_words(segment_words):
     return [z for y in [align_seg_words(x) for x in segment_words] for z in y]
 
 def allocate_pred_to_speech_segments(prediction, speech_segments):
+    print(f"PREDICTION |{prediction}|")
     pred_words=prediction.split(' ')
     n_words=len(pred_words)
+    if n_words==0:
+        return []
     segment_durations=np.diff(speech_segments)
     speech_duration=segment_durations.sum()
     segment_allocation=n_words*segment_durations/speech_duration
