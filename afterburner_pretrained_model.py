@@ -4,10 +4,10 @@ from afterburner_model import afterburner_model
 import random,  torch
 from torchtext.data import Field, Iterator, TabularDataset
 
-def afterburner_pretrained_model(language, phase, release, model_fn):
+def afterburner_pretrained_model(language, phase, release, model_fn, batch_size=32):
     C = Cfg('NIST', 16000, language, phase, release)
     error_correction_training_fn=f'traindata_{C.language}.tsv'
-    vocabulary_fn=f'vocabulary_{C.language}.csv'
+    vocabulary_fn=f'vocabulary_{C.language}.json'
     max_length_fn=f'maxlength_{C.language}.txt'
     with open(vocabulary_fn, 'r', encoding='utf-8') as f:
         graphemes = json.load(f)
@@ -19,4 +19,4 @@ def afterburner_pretrained_model(language, phase, release, model_fn):
         format='tsv',
         fields=[('src', SRC), ('trg', TRG)])
     train_iterator = Iterator(train_data, batch_size=batch_size)
-    return C, model, SRC, TRG, device, train_iterator
+    return C, model, SRC, TRG, device, train_iterator, batch_size

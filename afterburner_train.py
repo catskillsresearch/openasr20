@@ -8,7 +8,7 @@ from progress_bar import progress_bar
 from tqdm.auto import tqdm
 
 def afterburner_train(language, phase, release, model_fn, new_model_fn, epochs, batch_size=32):
-    C, model, SRC, TRG, device, train_iterator = afterburner_pretrained_model(language, phase, release, model_fn)
+    C, model, SRC, TRG, device, train_iterator,_ = afterburner_pretrained_model(language, phase, release, model_fn, batch_size)
     LEARNING_RATE = 0.0005
     optimizer = torch.optim.Adam(model.parameters(), lr = LEARNING_RATE)
     criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
