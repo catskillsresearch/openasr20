@@ -24,3 +24,5 @@ class AudioTextSample(Sample):
                     return True
         return False
 
+    def gold(self):
+        return [(0, self.target.value)]

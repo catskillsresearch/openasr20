@@ -18,4 +18,7 @@ class TranscriptArtifact (Artifact):
     def display(self):
         return pd.DataFrame(self.value, columns=['filename', 'channel', 'both', 'start', 'end', 'text'])
 
-
+    def gold(self):
+        _gold=[x[3:] for x in self.value if len(x)==6]
+        _gold=[(float(start), words) for start, finish, words in _gold]
+        return _gold

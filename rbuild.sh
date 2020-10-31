@@ -1,4 +1,6 @@
 #!/usr/bin/bash -x
-python run_scoring.py amharic build b02
-
-python run_scoring.py pashto build b02
+export phase=build
+export release=b30
+python run_scoring.py vietnamese ${phase} ${release}
+#python run_scoring.py amharic ${phase} ${release}
+#python run_scoring.py pashto ${phase} ${release}

@@ -1,4 +1,6 @@
 #!/usr/bin/bash -x
-python pred_pickles_to_shipper.py amharic build b02
-python pred_pickles_to_shipper.py vietnamese build b02
-python pred_pickles_to_shipper.py pashto build b02
+export phase=build
+export release=b30
+python pred_pickles_to_shipper.py vietnamese $phase $release
+#python pred_pickles_to_shipper.py amharic $phase $release
+#python pred_pickles_to_shipper.py pashto $phase $release

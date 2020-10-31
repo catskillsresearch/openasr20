@@ -24,6 +24,9 @@ class RecordingTranscriptionSample(Sample):
         self.target.display()
         print()
 
+    def gold(self):
+        return self.target.gold()
+    
     def transcript_split(self):
         x_np = self.source.value
         C = self.source.C

@@ -1,4 +1,7 @@
 #!/usr/bin/bash -x
-python splitter_transcriber.py amharic b02 0 build
-python splitter_transcriber.py vietnamese b02 0 build
-python splitter_transcriber.py pashto b02 0 build 20
+export phase=build
+export release=b30
+export maxduration=30
+python translator.py vietnamese ${phase} ${release} $maxduration
+#python translator.py amharic ${phase} ${release} $maxduration
+#python translator.py pashto ${phase} ${release} $maxduration

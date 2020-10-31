@@ -10,8 +10,6 @@ import sys, pickle, os, warnings
 warnings.filterwarnings("ignore")
 
 def splitter_transcriber(language, release, gpu, max_duration, phase):
-    tdir= f'transcriptions/{language}/{phase}/{release}'
-    os.system(f'mkdir -p {tdir}')
     print("language", language, "phase", phase, "release", release, "gpu", gpu, "max_duration", max_duration)
     C = Cfg('NIST', 16000, language, phase, release)
     model = load_pretrained_model(C, gpu)
@@ -21,6 +19,8 @@ def splitter_transcriber(language, release, gpu, max_duration, phase):
     if __name__ == '__main__':   
         with Pool(16) as pool:
             recordings = RecordingCorpus(C, pool)
+    tdir= f'transcriptions/{language}/{phase}/{release}'
+    os.system(f'mkdir -p {tdir}')
     translations = []
     for artifact in recordings.artifacts:
         key = artifact.key

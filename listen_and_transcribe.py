@@ -46,13 +46,15 @@ def listen_and_transcribe(C, model, max_duration, gold, audio, debug=False):
                 elif silences[0][0] == 0 and silences[0][1] != 0:
                     read_head +=silences[0][1]
                     if debug: print("advance past silence", read_head, silences[0][1])
-                    continue
+                    break
                 elif silences[0][0] > max_samples:
                     continue
                 else:
-                    silences=[(x,y) for x,y in silences if y <= max_samples]
+                    silences=[(x,y) for x,y in silences if x <= max_samples]
+                    if not len(silences):
+                        continue
                     start_at = read_head
-                    stop_at= read_head + silences[-0][0]
+                    stop_at= read_head + silences[0][0]
                     read_head = stop_at
                     if debug: print("stop to read", start_at, stop_at)
                     finished = True
@@ -67,6 +69,7 @@ def listen_and_transcribe(C, model, max_duration, gold, audio, debug=False):
                 start_at = read_head
                 stop_at = min(max_read_head, read_head + max_samples)
                 read_head = stop_at
+                finished = True
 
         read_heads.append(read_head)
         start=start_at*samples_per_spect
@@ -99,6 +102,7 @@ def listen_and_transcribe(C, model, max_duration, gold, audio, debug=False):
             except:
                 if debug: 
                     print("empty translation")
+    transcriptions = [(time, time+duration, pred) for time, duration, pred in transcriptions]
     return transcriptions
 
 if __name__=="__main__":
