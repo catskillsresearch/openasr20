@@ -19,7 +19,8 @@ def afterburner_gold(language, phase, release):
         pred=' '.join([z for x,y,z in transcript])
         pairs.append((pred, gold))
     pairs = [(x.lower(),y.lower()) for x,y in pairs if len(x)>0]
-    training='\n'.join([f'{x.strip()}\t{y.strip()}' for x,y in pairs])
+    augment = [(y,y) for x,y in pairs]
+    training='\n'.join([f'{x.strip()}\t{y.strip()}' for x,y in pairs+augment])
     error_correction_training_fn=f'traindata_{C.language}.tsv'
 
     # Save training set

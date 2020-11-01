@@ -38,5 +38,5 @@ if __name__=="__main__":
     language='vietnamese'
     phase='build'
     release='b30'
-    model_fn='save/new_afterburner/afterburner_301.pt'
+    model_fn='save/new_afterburner/afterburner_302.pt'
     afterburner_eval(language, phase, release, model_fn)

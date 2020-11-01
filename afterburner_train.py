@@ -42,6 +42,6 @@ if __name__=="__main__":
     language='vietnamese'
     phase='build'
     release='b30'
-    model_fn='save/new_afterburner/afterburner_301.pt'
-    new_model_fn='save/new_afterburner/afterburner_302.pt'
+    model_fn='save/new_afterburner/afterburner_302.pt'
+    new_model_fn='save/new_afterburner/afterburner_303.pt'
     afterburner_train(language, phase, release, model_fn, new_model_fn)
