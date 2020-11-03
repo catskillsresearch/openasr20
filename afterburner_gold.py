@@ -1,26 +1,30 @@
 # coding: utf-8
 # ASR post-processing corrector pred vs gold: TRAINING DATA CREATION
 
-import json
+import librosa, json
+from tqdm.auto import tqdm
+from json_lines_load import json_lines_load
 from load_training_examples import load_training_examples
 from load_pretrained_model import load_pretrained_model
-from listen_and_transcribe import listen_and_transcribe
+from transcribe import transcribe
+import logging
+logging.getLogger('nemo_logger').setLevel(logging.ERROR)
 
-def afterburner_gold(language, phase, release):
+def afterburner_gold(C, max_duration):
     """For each BUILD subsplit match gold with pred of split audio"""
-    C, splits = load_training_examples(language, phase, release)
-    max_duration=33
+    manifests=json_lines_load(f'{C.build_dir}/all_manifest.json')
     model = load_pretrained_model(C, 0)
     pairs=[]
-    for artifact in splits.artifacts:
-        gold=artifact.target.value
-        audio=artifact.source.value
-        transcript=listen_and_transcribe(C, model, max_duration, gold, audio)
-        pred=' '.join([z for x,y,z in transcript])
+    # "audio_filepath", "duration", "text"
+    for manifest in tqdm(manifests):
+        gold=manifest['text']
+        audio,sr1=librosa.load(manifest['audio_filepath'], sr=C.sample_rate)
+        pred=transcribe(C, model, audio)
         pairs.append((pred, gold))
     pairs = [(x.lower(),y.lower()) for x,y in pairs if len(x)>0]
     augment = [(y,y) for x,y in pairs]
-    training='\n'.join([f'{x.strip()}\t{y.strip()}' for x,y in pairs+augment])
+    tdata = list(set(pairs+augment))
+    training='\n'.join([f'{x.strip()}\t{y.strip()}' for x,y in tdata])
     error_correction_training_fn=f'traindata_{C.language}.tsv'
 
     # Save training set
@@ -43,7 +47,10 @@ def afterburner_gold(language, phase, release):
         print('saved', max_length_fn)
 
 if __name__=="__main__":
+    from Cfg import Cfg
     language='vietnamese'
     phase='build'
-    release='b30'
-    afterburner_gold(language, phase, release)
+    release='400'
+    max_duration=12
+    C = Cfg('NIST', 16000, language, phase, release) 
+    afterburner_gold(C, max_duration)
