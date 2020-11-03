@@ -18,9 +18,9 @@ model:
     manifest_filepath: ???
     sample_rate: 16000
     labels: *labels
-    batch_size: 20
+    batch_size: 46
     trim_silence: True
-    max_duration: 24.0
+    max_duration: 12.0
     shuffle: True
     is_tarred: False
     tarred_audio_filepaths: null
@@ -30,7 +30,7 @@ model:
     manifest_filepath: ???
     sample_rate: 16000
     labels: *labels
-    batch_size: 22
+    batch_size: 40
     shuffle: False
     num_workers: 16
 

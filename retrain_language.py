@@ -10,7 +10,7 @@ import pytorch_lightning as pl
 import os, datetime
 from ModelCheckpointAtEpochEnd import ModelCheckpointAtEpochEnd
 
-def retrain_language(C, train_fraction=0.8):
+def retrain_language(C, train_fraction=0.8, max_duration = 12.0):
     reshuffle_samples(C, train_fraction)
     model = load_pretrained_model(C, 0)
     config_path = f'{C.language}_{C.sample_rate}.yaml'
@@ -43,4 +43,4 @@ if __name__=="__main__":
     import sys
     language=sys.argv[1]
     C = Cfg('NIST', 16000, language, 'build') 
-    retrain_language(C, 0.95)
+    retrain_language(C, 0.95, 12.0)

@@ -1,5 +1,5 @@
 from copy import deepcopy
-from nemo.collections.asr.parts import perturb, segment
+from nemo.collections.asr.parts import perturb
 
 class Disturb:
 
