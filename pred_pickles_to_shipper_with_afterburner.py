@@ -6,7 +6,6 @@ import sys, os, tarfile
 from glob import glob
 from pathlib import Path
 from datetime import datetime
-from fixup import fixup
 import numpy as np
 np.seterr(all='raise')
 import warnings
@@ -17,6 +16,9 @@ from seq_to_seq import translate_sentence
 def toqenize(pred):
     return pred.strip().split(' ')
 
+def fixup(fn):
+    return ('_'.join(fn.split('/')[-1].split('_')[2:]))[0:-4]
+
 def pred_pickles_to_shipper_with_afterburner(language, phase, release):
     C = Cfg('NIST', 16000, _language=language, _phase=phase, _release=release) 
     model_fn='save/new_afterburner/afterburner_302.pt'
@@ -24,7 +26,6 @@ def pred_pickles_to_shipper_with_afterburner(language, phase, release):
     model.eval()
     pdir=f'pred/{language}/{phase}/{release}'
     tfns=glob(f'{pdir}/*.pkl')
-    print(f"tfns {len(tfns)}")
     if not tfns:
         print(f"ERROR: No translations in {pdir}")
         return
@@ -52,7 +53,8 @@ def pred_pickles_to_shipper_with_afterburner(language, phase, release):
             ends = tdur*np.cumsum(token_weights)
             tgrid=(ends-ends[0])+tbeg
             token_tstart=list(zip(tokens,tgrid))
-            if ctms[ctm]: start_from = ctms[ctm][-1][2]
+            if ctms[ctm]:
+                start_from = ctms[ctm][-1][2]
             for token, tstart, dt in zip(tokens,tgrid,dt):
                 if token and token[0] not in ['(', '<']:
                     row=(F,chnl,tstart,dt,token)

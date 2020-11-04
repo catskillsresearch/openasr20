@@ -18,6 +18,7 @@ def pred_pickles_to_shipper(language, phase, release):
     pdir=f'pred/{language}/{phase}/{release}'
     tfns=glob(f'{pdir}/*.pkl')
     print(f"tfns {len(tfns)}")
+    print(tfns)
     if not tfns:
         print(f"ERROR: No translations in {pdir}")
         return
@@ -44,14 +45,13 @@ def pred_pickles_to_shipper(language, phase, release):
             ends = tdur*np.cumsum(token_weights)
             tgrid=(ends-ends[0])+tbeg
             token_tstart=list(zip(tokens,tgrid))
-            if ctms[ctm]: start_from = ctms[ctm][-1][2]
+            if ctms[ctm]:
+                start_from = ctms[ctm][-1][2]
             for token, tstart, dt in zip(tokens,tgrid,dt):
                 if token and token[0] not in ['(', '<']:
                     row=(F,chnl,tstart,dt,token)
                     ctms[ctm].append(row)
 
-        # import pandas as pd
-        # pd.DataFrame(ctms[ctm],columns=['ctm','channel','start','duration','pred'])
     for ctm in ctms:
        ctms[ctm].sort()
     shipping_dir=f'ship/{C.language}/{C.phase}/{C.release}'
