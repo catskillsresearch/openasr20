@@ -75,6 +75,8 @@ def afterburner_model(graphemes, MAX_LENGTH, model_fn = None):
     model.apply(initialize_weights);
     if model_fn is not None and os.path.exists(model_fn):
         model.load_state_dict(torch.load(model_fn))
-        print('Reloaded trained model')
-
+        print('NOTE: Reloaded trained model', model_fn)
+    else:
+        print("WARNING: could not find", model_fn)
+        
     return model, SRC, TRG, device

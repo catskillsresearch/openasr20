@@ -11,6 +11,7 @@ from matplotlib.pyplot import *
 from smoothhtooms import smoothhtooms
 
 def listen_and_transcribe(C, model, max_duration, gold, audio, debug=False):
+    audio /= max(abs(audio.min()), abs(audio.max()))
     size=audio.shape[0]
     T=size/C.sample_rate
     X=np.arange(size)/C.sample_rate

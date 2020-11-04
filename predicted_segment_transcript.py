@@ -9,6 +9,7 @@ from allocate_pred_to_speech_segments import allocate_pred_to_speech_segments
 def predicted_segment_transcript(C, model, audio, start, end, s_dB_mean, samples_per_spect, dt_S):
     clip_audio=audio[start:end]
     prediction=transcribe(C, model, clip_audio)
+    print(f"PRED {start/C.sample_rate:2f} {prediction}")
     spec_start=int(start/samples_per_spect)
     spec_end=int(end/samples_per_spect)
     clip_power=s_dB_mean[spec_start:spec_end]

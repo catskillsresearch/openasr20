@@ -14,7 +14,6 @@ def align_segment_words(segment_words):
     return [z for y in [align_seg_words(x) for x in segment_words] for z in y]
 
 def allocate_pred_to_speech_segments(prediction, speech_segments):
-    print(f"PREDICTION |{prediction}|")
     pred_words=prediction.split(' ')
     n_words=len(pred_words)
     if n_words==0:

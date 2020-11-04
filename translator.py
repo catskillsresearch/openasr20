@@ -1,10 +1,11 @@
-import os, pickle
+import os, pickle, logging
 from multiprocessing import Pool
 from Cfg import Cfg
 from load_pretrained_model import load_pretrained_model
 from RecordingCorpus import RecordingCorpus
 from listen_and_transcribe import listen_and_transcribe
 from tqdm.auto import tqdm
+logging.getLogger('nemo_logger').setLevel(logging.ERROR)
 
 def translator(language, phase, release, max_duration):
     C = Cfg('NIST', 16000, language, phase, release)
