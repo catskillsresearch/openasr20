@@ -43,4 +43,4 @@ if __name__=="__main__":
     import sys
     language=sys.argv[1]
     C = Cfg('NIST', 16000, language, 'build') 
-    retrain_language(C, 0.95, 12.0)
+    retrain_language(C, 0.95, 10.0)

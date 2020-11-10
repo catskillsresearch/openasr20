@@ -1,14 +1,15 @@
 import random, json
 from json_lines_load import json_lines_load
 
-def reshuffle_samples(C, train_fraction = 0.8, max_duration = 12.0):
+def reshuffle_samples(C, train_fraction = 0.95, max_duration = 12.0):
     samples=json_lines_load(f'{C.build_dir}/all_manifest.json')
+    samples = [sample for sample in samples if sample['duration'] <= max_duration]
     random.shuffle(samples)
     n_samples=len(samples)
     n_train = int(train_fraction*n_samples)
-    samples = [sample for sample in samples if sample['duration'] <= max_duration]
     train_samples=samples[0:n_train]
     test_samples=samples[n_train:]
+    print("# train samples", len(train_samples), '# test samples', len(test_samples))
     for (case, S) in [('train', train_samples), ('test', test_samples)]:
         manifest_fn=f'{C.build_dir}/{case}_manifest.json'
         with open(manifest_fn, 'w', encoding='utf-8') as f_manifest:

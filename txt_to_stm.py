@@ -111,7 +111,9 @@ def txt_to_stm(df, filename, channel, no_Q = False):
 			record = [filename, channel_name, speaker_name_new, v, w]
 
 		else:
-			record = [filename, channel_name, "{}_{}".format(filename, channel_name), v, w, tokenized_text]
+			record = [filename, channel_name,
+                                  "{}_{}".format(filename, channel_name),
+                                  v, w, tokenized_text.lower()]
 
 		records.append(record)
 

@@ -466,7 +466,8 @@ def translate_sentence(sentence, src_field, trg_field, model, device, max_len = 
         if pred_token == trg_field.vocab.stoi[trg_field.eos_token]:
             break
     trg_tokens = [trg_field.vocab.itos[i] for i in trg_indexes]
-    return ''.join(trg_tokens[1:])
+    pred = ''.join(trg_tokens[1:])
+    return pred.replace('<eos>', '')
 
 def display_attention(sentence, translation, attention, n_heads = 8, n_rows = 4, n_cols = 2):
     

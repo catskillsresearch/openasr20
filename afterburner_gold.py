@@ -48,9 +48,9 @@ def afterburner_gold(C, max_duration):
 
 if __name__=="__main__":
     from Cfg import Cfg
-    language='vietnamese'
+    language='somali'
     phase='build'
-    release='400'
-    max_duration=12
+    release='000'
+    max_duration=10
     C = Cfg('NIST', 16000, language, phase, release) 
     afterburner_gold(C, max_duration)

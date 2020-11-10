@@ -20,7 +20,7 @@ model:
     labels: *labels
     batch_size: 46
     trim_silence: True
-    max_duration: 12.0
+    max_duration: 33.0
     shuffle: True
     is_tarred: False
     tarred_audio_filepaths: null

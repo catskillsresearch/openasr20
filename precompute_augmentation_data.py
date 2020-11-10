@@ -21,6 +21,6 @@ def precompute_augmentation_data(language, sample_rate):
     print('saved', manifest_fn)
 
 if __name__=="__main__":
-    language='vietnamese'
+    language='somali'
     sample_rate=16000
     precompute_augmentation_data(language, sample_rate)

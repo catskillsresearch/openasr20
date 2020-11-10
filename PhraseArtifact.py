@@ -7,7 +7,7 @@ class PhraseArtifact (Artifact):
     def __init__(self, _config, _value):
         super().__init__(_config, _value)
         self.tokens = tokenizer(_value)
-        self.value = ' '.join(self.tokens)
+        self.value = (' '.join(self.tokens)).lower()
         self.n_words = len(self.tokens)
         self.n_graphemes = len(self.value)
         self.romanized = unidecode(self.value)

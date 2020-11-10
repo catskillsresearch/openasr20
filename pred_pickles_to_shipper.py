@@ -6,19 +6,19 @@ import sys, os, tarfile
 from glob import glob
 from pathlib import Path
 from datetime import datetime
-from fixup import fixup
 import numpy as np
 np.seterr(all='raise')
 
 def toqenize(pred):
     return pred.strip().split(' ')
 
+def fixup(fn):
+    return ('_'.join(fn.split('/')[-1].split('_')[2:]))[0:-4]
+    
 def pred_pickles_to_shipper(language, phase, release):
     C = Cfg('NIST', 16000, _language=language, _phase=phase, _release=release) 
     pdir=f'pred/{language}/{phase}/{release}'
     tfns=glob(f'{pdir}/*.pkl')
-    print(f"tfns {len(tfns)}")
-    print(tfns)
     if not tfns:
         print(f"ERROR: No translations in {pdir}")
         return

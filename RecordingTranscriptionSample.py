@@ -34,7 +34,7 @@ class RecordingTranscriptionSample(Sample):
         speech_segments=[(int(a*C.sample_rate), int(b*C.sample_rate), words)
                          for (a,b,words) in speech
                          if 'IGNORE' not in words]
-        return [AudioTextSample(C, self.key+((lower,upper),), x_np[lower:upper], words)
+        return [AudioTextSample(C, self.key+((lower,upper),), x_np[lower:upper], words.lower())
                 for i, (lower, upper, words) in enumerate(speech_segments)]
 
     def split_on_silence(self, goal_length_in_seconds):
