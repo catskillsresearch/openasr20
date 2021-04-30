@@ -1,4 +1,3 @@
-from copy import deepcopy
 from nemo.collections.asr.parts import perturb
 
 class Disturb:

@@ -1,0 +1,136 @@
+[71.89] BABEL_BP_107_59868_20120324_015118_inLine.pkl PRED cắ a Tưởn Tem Đinh à thếen chêi xi mớy chả
+[72.59] BABEL_BP_107_19619_20120215_221131_inLine.pkl PRED ờ cùng phòn không biết đá làm chi coi hai ổng có cíi đào lạng thi rớ kiều đói nới đó nghe được không mày cừug đi đâu đồ đó không biết đườcg mà lấ ết
+[74.98] BABEL_BP_107_19619_20120215_221131_outLine.pkl PRED ga ờ
+[76.23] BABEL_BP_107_59868_20120324_015118_outLine.pkl PRED dẻàn tai
+
+ [97.21] BABEL_BP_107_14997_20120406_191102_inLine.pkl PRED đhú hi chỉn no chư hên đi đọng thế nó chị nhữn chái nghiệ cái sa nấy ghỉ lê nhờ thế lao việp mình lấy mảo lần
+[103.92] BABEL_BP_107_14997_20120406_191102_outLine.pkl PRED hô thế thì a lón lơi khô li ằng gì nó
+
+[113.60] BABEL_BP_107_12963_20120509_002346_inLine.pkl PRED bon mà ăm bết i mốn vối nh chang chủ đn dạn chào co là học hàn ná đíng cui nàm rồi
+[115.48] BABEL_BP_107_12963_20120509_002346_outLine.pkl PRED thế mẹ
+
+[140.01] BABEL_BP_107_88383_20120627_125444_outLine.pkl PRED a ứoca sáp chái hứ
+[143.71] BABEL_BP_107_88383_20120627_125444_inLine.pkl PRED thế thế cá mhôm
+
+[232.12] BABEL_BP_107_41661_20120329_023848_inLine.pkl PRED ba lắm Dhiê nan con lăm đấy l
+[236.01] BABEL_BP_107_41661_20120329_023848_outLine.pkl PRED ủôi mày công lài hai mộ hi
+[349.42] BABEL_BP_107_41661_20120329_022249_outLine.pkl PRED cá nà kổng đi tờhác là trắng đứ thì lánh là mả nhép mới với án thếth đ đãng màa à chụ anh nhấm mà câu đấy tần thằờng con mu việc í
+[357.63] BABEL_BP_107_41661_20120329_022249_inLine.pkl PRED à ạ
+[435.91] BABEL_BP_107_88383_20120627_130611_outLine.pkl PRED thô ôn thắng nón đi làn trốn khim mày
+[445.36] BABEL_BP_107_88383_20120627_130611_inLine.pkl PRED coi nê gát vố như lăn gì hánh đói thì vớt tới mun
+[468.36] BABEL_BP_107_12963_20120509_003852_outLine.pkl PRED chác án đó bào gễ hàn ló càn nó vý hồng tấy vậy như là một triệu bó mâng
+[468.42] BABEL_BP_107_12963_20120509_003852_inLine.pkl PRED cù ômì biết rồi
+[478.45] BABEL_BP_107_14997_20120406_190013_outLine.pkl PRED cóc gạn ó cời quen cái gì choáá cũ ca hồi
+[485.99] BABEL_BP_107_14997_20120406_190013_inLine.pkl PRED pây đày
+[499.82] BABEL_BP_107_28161_20120322_171027_inLine.pkl PRED cá gì cả bân ngày chơi a chắc mà thừnh chat thoán ấy hay ka toán ăn
+[505.50] BABEL_BP_107_59868_20120324_013729_outLine.pkl PRED thạả
+[507.99] BABEL_BP_107_59868_20120324_013729_inLine.pkl PRED không đóng hả sám ha xăng ở bá tết ô hơi đãi chín ừ khỏi khôn at vì
+[508.12] BABEL_BP_107_19619_20120215_223011_outLine.pkl PRED rây rứng Phút rhâng hao
+[518.88] BABEL_BP_107_19619_20120215_223011_inLine.pkl PRED ờ thắm mà chẻ
+[553.60] BABEL_BP_107_35391_20120416_192241_outLine.pkl PRED dạ ờ n ãy côn đang cưý hả hả
+[576.56] BABEL_BP_107_89838_20120212_205650_inLine.pkl PRED bắ anh mấy tì nữa
+[576.79] BABEL_BP_107_12248_20120614_183345_inLine.pkl PRED ba một chung một mấu cùng mấy ha
+[580.43] BABEL_BP_107_11031_20120617_182613_inLine.pkl PRED đậy ít thít rừ để đã điến kiá sứ còn thờn như bô năm cáig gỉ chá để chắn nón cá học là vống nư lọp từ đầu vậ ết cho được
+[582.60] BABEL_BP_107_18730_20120222_145916_inLine.pkl PRED mạ mành cũột cái mệi đấy thì ối thì là bải cũng ố một ten tức thôi chú ần nỡi khó lắm ừ
+[583.49] BABEL_BP_107_31538_20120320_202748_outLine.pkl PRED chắc chứ ràn mó tự như chỉ nọi vi ăn cũng c nhé để chó
+[584.36] BABEL_BP_107_14610_20120218_201908_inLine.pkl PRED ờ để xong bây giờ ốn nà mấy rồi giờa mũng chồi mày hăn bây giờ đóg bốn nhà ấy rồi mấy nhà rồi
+[584.36] BABEL_BP_107_43086_20120210_015927_inLine.pkl PRED hô cáng n đên Bếc ấy nhưng mà với lên cư em gay mà
+[585.54] BABEL_BP_107_87850_20120406_210353_inLine.pkl PRED ô chi làn chi mọc mình con họ nhưng người chân thình tháy bình thường mà
+[585.92] BABEL_BP_107_77697_20120416_235254_outLine.pkl PRED đá ì hắ ừ
+[586.14] BABEL_BP_107_21489_20120608_123945_inLine.pkl PRED non ba bảo tiếm thay dượng nayh nam ta khiệu công nến luúc ấy tì đơng xe em bới nha mởi chạ bới xe gì đúng không dó
+[586.24] BABEL_BP_107_76320_20120504_123902_outLine.pkl PRED đa số cá nhân nó hả ốn hải en só tai lớu cứ ờàà à hấy hả
+[586.30] BABEL_BP_107_90202_20120502_194459_inLine.pkl PRED ừ ờ
+[586.34] BABEL_BP_107_12120_20120704_024505_outLine.pkl PRED nởo nhưu lâu à nhỉ hồi Mã hôn đó tin láo hả
+[586.43] BABEL_BP_107_33704_20120416_005402_inLine.pkl PRED à
+[586.94] BABEL_BP_107_28161_20120322_171027_outLine.pkl PRED ờ nóng tạn cô hại có bà g cũng màn nơi chứ muit đi tường tá được mấy chriệu hông thì
+[587.23] BABEL_BP_107_32120_20120704_182238_inLine.pkl PRED thôg chứ thì ci đợt lợt cái chìh riên cưới đi vàoa cố
+[587.36] BABEL_BP_107_77771_20120421_231323_outLine.pkl PRED rồi ơ phe t tên môn ơn cảo bận đá mắt tì chiều mỗi ba
+[587.39] BABEL_BP_107_59891_20120504_013809_inLine.pkl PRED hâ thế có điện thế màn đồng mô gà mần điện cà chê ồ ờ
+[587.39] BABEL_BP_107_75990_20120408_211713_inLine.pkl PRED ừ i gừng cái nhừn ghiì đư nó triểu ci triểui thìn diẫn tinh gản không mà gì khong cứ gi đường ắm rồi ta mình tường à như thì nó không thải mày
+[587.42] BABEL_BP_107_86259_20120507_015816_inLine.pkl PRED cìi đán lược đí mi sưa ác đông thì bia chắn tông chịu hiện chắc làm nều nó đi họpc đầu chừn vài hết ờ đi bọn Tọng ra nhâm có đườc kiện à xong ô ra dường ngoài nà học hết
+[587.52] BABEL_BP_107_35441_20120421_221245_outLine.pkl PRED sốiang mà thì ừ à cứ
+[587.71] BABEL_BP_107_65606_20120416_004652_inLine.pkl PRED hạ
+[587.90] BABEL_BP_107_15502_20120627_124423_inLine.pkl PRED vậy nè bây giờ vậy đèo còn rới hộ cố chon Tu á a cái bụ cohon xêu á chị nghe nói là ba tay tháng Bảy mới có mớ có điện mái cái điện triến xe tì hông quá
+[588.00] BABEL_BP_107_39080_20120415_141817_inLine.pkl PRED Ot chưềa nói bốn tào chị ăn là ốn íng là m ăn hở dị về chom ắm chị đúcg có ăn hắ đợt đau ừừ có
+[588.03] BABEL_BP_107_39997_20120516_214034_inLine.pkl PRED dồi thời sán sốt tì
+[588.19] BABEL_BP_107_85204_20120212_190017_inLine.pkl PRED ờ ừ gồi chớc hong Thậo bảnh k gởi điện Thại ria nó chuyện không
+[588.32] BABEL_BP_107_28648_20120506_223200_inLine.pkl PRED ừ thừ chỉn biết rồi ti nưi nhờ dì nà bao giờờ
+[588.70] BABEL_BP_107_57020_20120427_011940_inLine.pkl PRED ề còn đi đi học sớn như mà cuổc seng nhì kê rồi na muừa em chịu vễy thư ứ
+[588.79] BABEL_BP_107_47037_20120415_210047_outLine.pkl PRED Tù nay hăm xeo à an ban bai à cái gì ử
+[588.79] BABEL_BP_107_54285_20120430_233928_outLine.pkl PRED ba xao tân đà ồ ki không rồ
+[588.92] BABEL_BP_107_35391_20120416_192241_inLine.pkl PRED mà ừơ i là con ghe nói tợ nê ngạn cái đói thì nhề sân nà để chong có họ hô xin gẻ cụ mần phì nó cũng kốc bàn xí
+[588.95] BABEL_BP_107_77697_20120416_235254_inLine.pkl PRED cóa có dep hả có rhồi nhưng mà con hay đi chẳn qua hai quen em
+[589.18] BABEL_BP_107_92386_20120322_195456_inLine.pkl PRED ty mà à tôi sỗ lại sợ lạt
+[589.24] BABEL_BP_107_12120_20120704_024505_inLine.pkl PRED hô ai chơy nghài bữa vô chũng choi rồi tải mày cũng có thông
+[589.47] BABEL_BP_107_77771_20120421_231323_inLine.pkl PRED thế hả tờđờ coi thì đống lại á à hai Năm đi nó mà phốc đang ni
+[590.01] BABEL_BP_107_56812_20120502_123725_inLine.pkl PRED à thằg màm làm mới đỡ nót mà tao chứ hẻ biết biết mà tao chưa thi a làn ô đờ
+[590.17] BABEL_BP_107_96283_20120503_162149_outLine.pkl PRED th thì phảih nầm críc sí đi chứng bây giờ tiền bà náo kin cu chấy tỉn
+[590.42] BABEL_BP_107_96283_20120503_162149_inLine.pkl PRED vớ
+[590.52] BABEL_BP_107_71178_20120617_184313_inLine.pkl PRED ờ tờ có nghì hôn tchợc lô o
+[590.71] BABEL_BP_107_43086_20120210_015927_outLine.pkl PRED thôg xong c giái nó mồi lăm mua ni nhưng mọ ăn đưun lô nưa ô kôn bng
+[590.90] BABEL_BP_107_15493_20120617_120952_outLine.pkl PRED lập lắm á đi để chắm hỏ xhông đết tới bé nói chung là bạn may đẹp lắm á
+[591.09] BABEL_BP_107_16167_20120215_213113_outLine.pkl PRED có tác phuùng gì ờ ờ
+[591.16] BABEL_BP_107_41456_20120421_133628_inLine.pkl PRED ờ cá lầm lái bán à hế xấy gàn nứa
+[591.16] BABEL_BP_107_83219_20120421_172919_inLine.pkl PRED ừừ
+[591.57] BABEL_BP_107_75990_20120408_211713_outLine.pkl PRED ờ phềp cả
+[591.83] BABEL_BP_107_28648_20120506_223200_outLine.pkl PRED thế mày tính rtan lớ sáy ín nà trờ cg
+[591.83] BABEL_BP_107_79412_20120322_174955_outLine.pkl PRED a gà mat
+[592.12] BABEL_BP_107_21489_20120608_123945_outLine.pkl PRED châi đế vậ hắm kểu lạ hiơn sào được
+[592.24] BABEL_BP_107_13476_20120428_003452_outLine.pkl PRED ừ
+[592.28] BABEL_BP_107_45677_20120428_184714_outLine.pkl PRED rồi đong rà tữa ờ au tớờ
+[592.28] BABEL_BP_107_73542_20120209_010311_outLine.pkl PRED hả ờ
+[592.47] BABEL_BP_107_32120_20120704_182238_outLine.pkl PRED kỉnh ũng xhá
+[592.66] BABEL_BP_107_85204_20120212_190017_outLine.pkl PRED cơ cá luôn bổi sái ó rồi vồi sốt nhồuu
+[593.27] BABEL_BP_107_70625_20120426_235142_outLine.pkl PRED à ang phin ó chon đi anh Tinh thì anh cũngg ngời đấ ngồi chòng tớ ấy thêu xhong là
+[593.46] BABEL_BP_107_45512_20120505_135144_inLine.pkl PRED ừ
+[593.81] BABEL_BP_107_31538_20120320_202748_inLine.pkl PRED cám cái mà hàm cào mại mó chứ mà
+[594.00] BABEL_BP_107_97760_20120614_184333_inLine.pkl PRED xạ xêng vày báy rờ rẻ thôi đởng như lấm khán
+[594.19] BABEL_BP_107_57020_20120427_011940_outLine.pkl PRED thạ
+[594.26] BABEL_BP_107_87850_20120406_210354_outLine.pkl PRED trong anh cũng phải Nỏiưn cóo véyeyh eng mà nó thì qoản các cứ mà
+[594.38] BABEL_BP_107_70625_20120426_235142_inLine.pkl PRED Tểy nấ ờ
+[594.42] BABEL_BP_107_26644_20120509_013405_outLine.pkl PRED khôn hưu mà nói chung là mình hác ở nế chỗ là trung ấy thôi chứ đó ông hà
+[594.48] BABEL_BP_107_73542_20120209_010311_inLine.pkl PRED rờ thếănh ày an đê hènh thì iờ lú mô đì gọi hồiai đớ ta thập Thun đó hả
+[594.70] BABEL_BP_107_15502_20120627_124423_outLine.pkl PRED th ừ
+[594.86] BABEL_BP_107_63459_20120415_003841_inLine.pkl PRED ừ để so tới ó dở quyé cá dộ
+[594.93] BABEL_BP_107_29168_20120321_215013_inLine.pkl PRED h
+[595.02] BABEL_BP_107_18730_20120222_145916_outLine.pkl PRED tải ká nhưà ẹ táo có bàng tao thế nào á à co là bớn mướ nỗi Hiện
+[595.05] BABEL_BP_107_57976_20120704_183740_outLine.pkl PRED xảu lên nó trên nó lấy bạo thứng
+[595.15] BABEL_BP_107_26644_20120509_013405_inLine.pkl PRED xa ở
+[595.25] BABEL_BP_107_45512_20120505_135144_outLine.pkl PRED có đơu được đâu chái sao đâu đi nhưng mà hìn ni tố ra sốt cổ u
+[595.41] BABEL_BP_107_56812_20120502_123725_outLine.pkl PRED dâ ờ rứa hả
+[595.44] BABEL_BP_107_54285_20120430_233928_inLine.pkl PRED na
+[595.50] BABEL_BP_107_79526_20120420_150504_outLine.pkl PRED t
+[595.60] BABEL_BP_107_92386_20120322_195456_outLine.pkl PRED ừ tạ
+[595.88] BABEL_BP_107_59891_20120504_013809_outLine.pkl PRED rới ăng mói đ thô hả
+[595.92] BABEL_BP_107_86259_20120507_015816_outLine.pkl PRED tời đơi hoàn hạn ở
+[595.98] BABEL_BP_107_45677_20120428_184714_inLine.pkl PRED ừ lẹ
+[596.04] BABEL_BP_107_32236_20120505_195420_inLine.pkl PRED mất điệp quyế bit ệ về lm
+[596.04] BABEL_BP_107_35441_20120421_221245_inLine.pkl PRED lai chá ái cáu đhi ạ học mồi thi rồi
+[596.04] BABEL_BP_107_90202_20120502_194459_outLine.pkl PRED thó khôn Thải chải vì lẫn được đi cái diệu tính lớn quá ri bả d i
+[596.43] BABEL_BP_107_14769_20120420_013147_outLine.pkl PRED Úế cón nhà không
+[596.84] BABEL_BP_107_39140_20120409_163031_outLine.pkl PRED vậy nói lồn khócg
+[596.87] BABEL_BP_107_89838_20120212_205650_outLine.pkl PRED vại không biết kếa tao
+[596.94] BABEL_BP_107_39140_20120409_163031_inLine.pkl PRED cối ghì có ai
+[597.00] BABEL_BP_107_63459_20120415_003841_outLine.pkl PRED đáiă lắm thii
+[597.03] BABEL_BP_107_79412_20120322_174955_inLine.pkl PRED ba thai hôm chượu thính
+[597.23] BABEL_BP_107_97760_20120614_184333_outLine.pkl PRED cơ mình ông luai là bốn đưa bốmt đức không anh đi đó ó
+[597.26] BABEL_BP_107_11031_20120617_182613_outLine.pkl PRED mất cùng lầ há
+[597.29] BABEL_BP_107_65606_20120416_004652_outLine.pkl PRED đây thì nắm coi họ
+[597.45] BABEL_BP_107_57976_20120704_183740_inLine.pkl PRED h ă tha
+[597.58] BABEL_BP_107_83219_20120421_172919_outLine.pkl PRED ơa mày ông min còn tông thâu mộn mà
+[597.61] BABEL_BP_107_33704_20120416_005402_outLine.pkl PRED rò iđắ nỗ vôn ôn bao nà
+[597.67] BABEL_BP_107_14769_20120420_013147_inLine.pkl PRED dãy thì chó
+[597.74] BABEL_BP_107_12248_20120614_183345_outLine.pkl PRED táng nlời thấy ơ à
+[597.77] BABEL_BP_107_71178_20120617_184313_outLine.pkl PRED ờ thệ
+[597.93] BABEL_BP_107_39080_20120415_141817_outLine.pkl PRED ủai ốcg o
+[598.15] BABEL_BP_107_47037_20120415_210047_inLine.pkl PRED vậi vớ ờ
+[598.50] BABEL_BP_107_15493_20120617_120952_inLine.pkl PRED cìn ình thường me
+[598.54] BABEL_BP_107_13476_20120428_003452_inLine.pkl PRED tởo rồiă oi rới chịt
+[598.70] BABEL_BP_107_16167_20120215_213113_inLine.pkl PRED phậi dì thếa
+[598.76] BABEL_BP_107_79526_20120420_150504_inLine.pkl PRED à ó buôn chì á
+[598.82] BABEL_BP_107_39997_20120516_214035_outLine.pkl PRED t thế à
+[598.86] BABEL_BP_107_29168_20120321_215013_outLine.pkl PRED cì
+[598.92] BABEL_BP_107_76320_20120504_123902_inLine.pkl PRED xo lẽi ái mám mhiốn trăm
+[598.98] BABEL_BP_107_14610_20120218_201908_outLine.pkl PRED vân
+[598.98] BABEL_BP_107_41456_20120421_133628_outLine.pkl PRED hả
+[599.08] BABEL_BP_107_32236_20120505_195420_outLine.pkl PRED ái đi

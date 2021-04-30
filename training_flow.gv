@@ -1,0 +1,17 @@
+digraph training_flow {
+	a [label="BUILD audio" shape=folder]
+	b [label="BUILD transcription" shape=folder]
+	c [label="Clip to <10s" shape=rectangle]
+	d [label="(audio,gold) pair" shape=note]
+	e [label=augmentation shape=rectangle]
+	f [label="pair + 10 augmentations" shape=note]
+	g [label=trainer shape=rectangle]
+	h [label="trained model" shape=cylinder]
+	a -> c
+	b -> c
+	c -> d
+	d -> e
+	e -> f
+	f -> g
+	g -> h
+}

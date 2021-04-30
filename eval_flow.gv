@@ -1,0 +1,18 @@
+digraph eval_flow {
+	a [label="EVAL audio" shape=folder]
+	b [label="SAD to <10s" shape=rectangle]
+	c [label=clip shape=note]
+	m [label="trained model" shape=cylinder]
+	d [label=translate shape=rectangle]
+	e [label="predicted text" shape=note]
+	f [label="allocate words to detected speech regions" shape=rectangle]
+	g [label="(prediction, start, duration)" shape=note]
+	a -> b
+	b -> c
+	c -> d
+	d -> e
+	c -> f
+	e -> f
+	f -> g
+	m -> d
+}

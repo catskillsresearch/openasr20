@@ -1,0 +1,137 @@
+[80.52] BABEL_BP_107_19619_20120215_221131_inLine.txt <== ờ <no-speech> khùng khùng <no-speech> không biết đang làm chi rứa hai ông không biết đang làm chi rứa chuyện đó thì rứa đó nghe được không <no-speech> mà chừ đi đâu rồi rứa không *biết* đường nữa dắt đ- ~  
+[80.68] BABEL_BP_107_19619_20120215_221131_outLine.txt <== <no-speech> 
+[81.02] BABEL_BP_107_59868_20120324_015118_inLine.txt <== <no-speech> 
+[81.1] BABEL_BP_107_59868_20120324_015118_outLine.txt <== <no-speech> sao anh biết 
+
+[111.0] BABEL_BP_107_14997_20120406_191102_inLine.txt <== <no-speech> 
+[111.18] BABEL_BP_107_14997_20120406_191102_outLine.txt <== cô chứ còn gì nữa 
+
+[121.82] BABEL_BP_107_12963_20120509_002346_outLine.txt <== <no-speech> 
+[121.9] BABEL_BP_107_12963_20120509_002346_inLine.txt <== <no-speech> cuối năm rồi 
+
+[149.92] BABEL_BP_107_88383_20120627_125444_inLine.txt <== thay đổi m- ~ 
+[149.9] BABEL_BP_107_88383_20120627_125444_outLine.txt <== <no-speech> 
+
+
+[239.0] BABEL_BP_107_41661_20120329_023848_inLine.txt <== à nói ng- ~ 
+[239.28] BABEL_BP_107_41661_20120329_023848_outLine.txt <== <no-speech> 
+[360.44] BABEL_BP_107_41661_20120329_022249_inLine.txt <== <no-speech> 
+[360.8] BABEL_BP_107_41661_20120329_022249_outLine.txt <== <no-speech> 
+[449.995] BABEL_BP_107_88383_20120627_130611_inLine.txt <== không cái này <sta> <no-speech> tao thì tao đi thành bên đây nếu mà chị Ngọc vô cái <no-speech> gấp vô cái dự làm cái dự án đó thì mời tao vô  
+[450.36] BABEL_BP_107_88383_20120627_130611_outLine.txt <== <no-speech> 
+[478.08] BABEL_BP_107_12963_20120509_003852_inLine.txt <== <no-speech> 
+[478.32] BABEL_BP_107_12963_20120509_003852_outLine.txt <== tám trăm hai 
+[489.08] BABEL_BP_107_14997_20120406_190013_inLine.txt <== <no-speech> 
+[489.4] BABEL_BP_107_14997_20120406_190013_outLine.txt <== cô hay nhìn 
+[519.5] BABEL_BP_107_59868_20120324_013729_inLine.txt <== <sta> nói gì 
+[519.72] BABEL_BP_107_59868_20120324_013729_outLine.txt <== <no-speech> 
+[519.98] BABEL_BP_107_19619_20120215_223011_inLine.txt <== *ghét* cái *mặt* <no-speech> chẳng 
+[520.12] BABEL_BP_107_19619_20120215_223011_outLine.txt <== tốt hơn (()) ~ 
+[599.815] BABEL_BP_107_32120_20120704_182238_inLine.txt <== <hes> đợt thì thì đợt đợt cái chị Liên chị cưới đấy chị ấy bảo là có lu- ~ 
+[599.8] BABEL_BP_107_33704_20120416_005402_outLine.txt <== <no-speech> xong nó lấy điện thoại ra 
+[599.94] BABEL_BP_107_16167_20120215_213113_inLine.txt <== <no-speech> 
+[599.94] BABEL_BP_107_85204_20120212_190017_outLine.txt <== <no-speech> 
+[599.96] BABEL_BP_107_12248_20120614_183345_inLine.txt <== <no-speech> 
+[599.96] BABEL_BP_107_14769_20120420_013147_inLine.txt <== <no-speech> <sta> ờ sao 
+[599.96] BABEL_BP_107_15502_20120627_124423_inLine.txt <== <no-speech> 
+[599.96] BABEL_BP_107_35391_20120416_192241_inLine.txt <== <no-speech> 
+[599.96] BABEL_BP_107_47037_20120415_210047_inLine.txt <== <no-speech> 
+[599.96] BABEL_BP_107_75990_20120408_211713_inLine.txt <== <no-speech> 
+[599.96] BABEL_BP_107_79526_20120420_150504_inLine.txt <== ừ <hes> một số những quầy ờ <hes> bán <hes> giới thiệu sản phẩm rồi những mặt hàng của chè A- ~ 
+[599.96] BABEL_BP_107_97760_20120614_184333_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_11031_20120617_182613_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_14610_20120218_201908_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_28161_20120322_171027_inLine.txt <== đâu nhưng mà nghe nói bảo dạy ở xa thằng cha ni <hes> dạy <hes> ở xa lắm ở <hes> 
+[599.98] BABEL_BP_107_29168_20120321_215013_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_31538_20120320_202748_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_33704_20120416_005402_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_39080_20120415_141817_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_39140_20120409_163031_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_41456_20120421_133628_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_43086_20120210_015927_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_65606_20120416_004652_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_73542_20120209_010311_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_77697_20120416_235254_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_77771_20120421_231323_inLine.txt <== ba á hả <no-speech> thì để coi <no-speech> ví dụ <hes> thì chẳng lẽ là hè năm ni <no-speech> nếu mà cô Đoan đi 
+[599.98] BABEL_BP_107_79412_20120322_174955_inLine.txt <== <int> hắn á 
+[599.98] BABEL_BP_107_83219_20120421_172919_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_87850_20120406_210353_inLine.txt <== <no-speech> 
+[599.98] BABEL_BP_107_92386_20120322_195456_inLine.txt <== <no-speech> 
+[599.995] BABEL_BP_107_12120_20120704_024505_inLine.txt <== trời ơi trời <hes> vài bữa vô trong chơi <laugh> rồi mày cũng có thường 
+[599.995] BABEL_BP_107_57976_20120704_183740_inLine.txt <== thằng đấy á 
+[599.995] BABEL_BP_107_71178_20120617_184313_inLine.txt <== ừ để có gì anh trả lời sau 
+[599.9] BABEL_BP_107_39140_20120409_163031_outLine.txt <== <no-speech> 
+[599.9] BABEL_BP_107_63459_20120415_003841_inLine.txt <== <no-speech> <sta> ừ để coi coi nó giải quyết cái vụ 
+[600.04] BABEL_BP_107_13476_20120428_003452_inLine.txt <== thì thì thì ấy <no-speech> thôi cũng phải ấy cho hắn mà có đẻ thì hắn đẻ ở bên đó rồi rồi <hes> rồi chị sa- ~ 
+[600.04] BABEL_BP_107_15493_20120617_120952_inLine.txt <== <no-speech> 
+[600.04] BABEL_BP_107_18730_20120222_145916_inLine.txt <== <no-speech> 
+[600.04] BABEL_BP_107_35441_20120421_221245_outLine.txt <== <no-speech> 
+[600.04] BABEL_BP_107_77697_20120416_235254_outLine.txt <== <no-speech> 
+[600.06] BABEL_BP_107_18730_20120222_145916_outLine.txt <== <no-speech> 
+[600.06] BABEL_BP_107_97760_20120614_184333_outLine.txt <== Vân Anh nữa là năm 
+[600.08] BABEL_BP_107_35391_20120416_192241_outLine.txt <== <no-speech> 
+[600.08] BABEL_BP_107_96283_20120503_162149_inLine.txt <== <no-speech> 
+[600.0] BABEL_BP_107_35441_20120421_221245_inLine.txt <== <no-speech> 
+[600.0] BABEL_BP_107_85204_20120212_190017_inLine.txt <== <no-speech> 
+[600.0] BABEL_BP_107_89838_20120212_205650_inLine.txt <== <no-speech> 
+[600.0] BABEL_BP_107_89838_20120212_205650_outLine.txt <== <no-speech> sao 
+[600.115] BABEL_BP_107_32236_20120505_195420_inLine.txt <== <no-speech> bị chết hay là 
+[600.12] BABEL_BP_107_11031_20120617_182613_outLine.txt <== <no-speech> 
+[600.12] BABEL_BP_107_28648_20120506_223200_inLine.txt <== ừ bao giờ 
+[600.12] BABEL_BP_107_45677_20120428_184714_inLine.txt <== <no-speech> 
+[600.14] BABEL_BP_107_47037_20120415_210047_outLine.txt <== <no-speech> 
+[600.14] BABEL_BP_107_83219_20120421_172919_outLine.txt <== tưng (()) 
+[600.16] BABEL_BP_107_14610_20120218_201908_outLine.txt <== <no-speech> 
+[600.16] BABEL_BP_107_39080_20120415_141817_outLine.txt <== <no-speech> 
+[600.16] BABEL_BP_107_79412_20120322_174955_outLine.txt <== nhưng mà 
+[600.16] BABEL_BP_107_79526_20120420_150504_outLine.txt <== <no-speech> 
+[600.18] BABEL_BP_107_12248_20120614_183345_outLine.txt <== <no-speech> 
+[600.18] BABEL_BP_107_41456_20120421_133628_outLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_14769_20120420_013147_outLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_21489_20120608_123945_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_26644_20120509_013405_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_28648_20120506_223200_outLine.txt <== cha mẹ <no-speech> tính toán nó chả tính nên giờ cứ 
+[600.1] BABEL_BP_107_29168_20120321_215013_outLine.txt <== đưa cho ông cha bà dùng <sta> 
+[600.1] BABEL_BP_107_39997_20120516_214034_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_43086_20120210_015927_outLine.txt <== vô Facebook 
+[600.1] BABEL_BP_107_45512_20120505_135144_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_54285_20120430_233928_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_56812_20120502_123725_inLine.txt <== <sta> <no-speech> ờ 
+[600.1] BABEL_BP_107_57020_20120427_011940_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_57976_20120704_183740_outLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_59891_20120504_013809_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_63459_20120415_003841_outLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_70625_20120426_235142_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_76320_20120504_123902_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_86259_20120507_015816_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_90202_20120502_194459_inLine.txt <== <no-speech> 
+[600.1] BABEL_BP_107_92386_20120322_195456_outLine.txt <== <no-speech> 
+[600.22] BABEL_BP_107_15502_20120627_124423_outLine.txt <== <no-speech> 
+[600.22] BABEL_BP_107_87850_20120406_210354_outLine.txt <== <no-speech> 
+[600.24] BABEL_BP_107_21489_20120608_123945_outLine.txt <== <no-speech> 
+[600.24] BABEL_BP_107_45677_20120428_184714_outLine.txt <== <no-speech> 
+[600.24] BABEL_BP_107_54285_20120430_233928_outLine.txt <== <no-speech> 
+[600.26] BABEL_BP_107_32236_20120505_195420_outLine.txt <== <no-speech> 
+[600.28] BABEL_BP_107_16167_20120215_213113_outLine.txt <== <no-speech> 
+[600.28] BABEL_BP_107_57020_20120427_011940_outLine.txt <== <no-speech> 
+[600.28] BABEL_BP_107_73542_20120209_010311_outLine.txt <== <no-speech> 
+[600.28] BABEL_BP_107_90202_20120502_194459_outLine.txt <== tích lớn quá với lại 
+[600.2] BABEL_BP_107_12120_20120704_024505_outLine.txt <== <no-speech> 
+[600.2] BABEL_BP_107_45512_20120505_135144_outLine.txt <== <no-speech> 
+[600.32] BABEL_BP_107_77771_20120421_231323_outLine.txt <== <no-speech> 
+[600.34] BABEL_BP_107_31538_20120320_202748_outLine.txt <== <no-speech> 
+[600.34] BABEL_BP_107_59891_20120504_013809_outLine.txt <== <no-speech> 
+[600.34] BABEL_BP_107_76320_20120504_123902_outLine.txt <== <no-speech> 
+[600.34] BABEL_BP_107_86259_20120507_015816_outLine.txt <== <no-speech> 
+[600.36] BABEL_BP_107_32120_20120704_182238_outLine.txt <== <no-speech> 
+[600.3] BABEL_BP_107_65606_20120416_004652_outLine.txt <== <no-speech> 
+[600.3] BABEL_BP_107_71178_20120617_184313_outLine.txt <== <no-speech> 
+[600.3] BABEL_BP_107_75990_20120408_211713_outLine.txt <== <no-speech> 
+[600.42] BABEL_BP_107_15493_20120617_120952_outLine.txt <== <no-speech> 
+[600.42] BABEL_BP_107_26644_20120509_013405_outLine.txt <== chứ nó không phải 
+[600.44] BABEL_BP_107_70625_20120426_235142_outLine.txt <== xong là 
+[600.46] BABEL_BP_107_13476_20120428_003452_outLine.txt <== <no-speech> 
+[600.48] BABEL_BP_107_96283_20120503_162149_outLine.txt <== <no-speech> 
+[600.4] BABEL_BP_107_28161_20120322_171027_outLine.txt <== <no-speech> 
+[600.4] BABEL_BP_107_39997_20120516_214035_outLine.txt <== <no-speech> 
+[600.5] BABEL_BP_107_56812_20120502_123725_outLine.txt <== <no-speech> 

@@ -1,7 +1,7 @@
 #!/usr/bin/bash -x
 export language=somali
 export phase=dev
-export release=final_constrained
+export release=final_constrained2
 export maxduration=10
 export CUDA_VISIBLE_DEVICES=1
 date > start_dev.txt
